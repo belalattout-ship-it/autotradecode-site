@@ -5,23 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AutoTradeCode – Custom Trading Bots</title>
 <style>
-
 /* ---------------- GENERAL STYLE ---------------- */
+
+:root {
+    --primary: #00f5a0;   /* main neon */
+    --accent:  #00d4ff;   /* secondary neon */
+    --bg:      #020617;
+    --card:    #020617;
+    --border:  #111827;
+    --text:    #f9fafb;
+    --muted:   #9ca3af;
+}
+
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #050505;
-    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(circle at top, #020617 0%, #020617 40%, #000 100%);
+    color: var(--text);
     overflow-x: hidden;
 }
 
-/* Neon green theme */
-:root {
-    --primary: #00ff95;
-    --dark: #050505;
-    --card: #0d0d0d;
-    --border: #0f0f0f;
+/* layout helper */
+.container {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* Smooth fade-in animation */
@@ -37,188 +50,480 @@ body {
 
 nav {
     width: 100%;
-    padding: 20px 40px;
-    background: rgba(10,10,10,0.85);
+    padding: 18px 40px;
+    background: rgba(2,6,23,0.92);
     position: fixed;
     top: 0;
     left: 0;
     z-index: 20;
-    border-bottom: 1px solid #0f0f0f;
-    backdrop-filter: blur(6px);
+    border-bottom: 1px solid #020617;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 nav .logo {
-    font-size: 26px;
-    font-weight: bold;
+    font-size: 24px;
+    font-weight: 700;
     color: var(--primary);
+    letter-spacing: 0.04em;
 }
 nav ul {
-    float: right;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 nav ul li {
     display: inline-block;
-    margin-left: 20px;
+    margin-left: 22px;
 }
 nav ul li a {
-    color: white;
+    color: var(--muted);
     text-decoration: none;
-    font-size: 16px;
+    font-size: 15px;
+    transition: color 0.2s ease, opacity 0.2s ease;
+    opacity: 0.9;
 }
 nav ul li a:hover {
-    color: var(--primary);
+    color: var(--accent);
+    opacity: 1;
+}
+
+/* ---------------- BUTTONS ---------------- */
+
+.btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+}
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #020617;
+}
+.btn-primary:hover {
+    opacity: 0.9;
+}
+.btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border-color: #1f2937;
+}
+.btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
 /* ---------------- HERO ---------------- */
 
 .hero {
-    margin-top: 120px;
-    text-align: center;
-    padding: 40px;
+    margin-top: 110px;
+    padding: 60px 0 40px;
 }
-.hero h1 {
-    font-size: 58px;
+.hero-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+}
+.hero-content {
+    flex: 1 1 320px;
+    min-width: 0;
+}
+.hero-eyebrow {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+.hero-title {
+    font-size: 44px;
+    line-height: 1.1;
+    margin: 0 0 16px;
+}
+.hero-highlight {
     color: var(--primary);
 }
-.hero p {
-    font-size: 20px;
-    opacity: 0.8;
-    max-width: 650px;
-    margin: auto;
+.hero-subtitle {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 18px;
 }
-.hero button {
-    background: var(--primary);
-    border: none;
-    color: black;
-    padding: 15px 30px;
+.hero-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 22px;
+    color: var(--muted);
+    font-size: 14px;
+}
+.hero-benefits li {
+    margin-bottom: 6px;
+}
+.hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+.hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.hero-trust-item {
+    border-radius: 12px;
+    border: 1px solid #1f2937;
+    padding: 10px 14px;
+    background: radial-gradient(circle at top left, rgba(0,245,160,0.12), rgba(15,23,42,0.8));
+    min-width: 140px;
+}
+.hero-trust-label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+}
+.hero-trust-value {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+.hero-side {
+    flex: 0 1 340px;
+}
+.hero-card {
+    background: radial-gradient(circle at top, rgba(0,245,160,0.18), rgba(15,23,42,1));
+    border-radius: 18px;
+    padding: 22px 20px;
+    border: 1px solid #1f2937;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+}
+.hero-card-label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin-bottom: 6px;
+}
+.hero-card-title {
     font-size: 18px;
-    border-radius: 10px;
-    margin-top: 20px;
-    cursor: pointer;
+    margin: 0 0 12px;
 }
-.hero button:hover {
-    opacity: 0.75;
+.hero-card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 14px;
+    font-size: 14px;
+    color: var(--muted);
+}
+.hero-card-list li {
+    margin-bottom: 6px;
+}
+.hero-card-note {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* ---------------- HOW IT WORKS ---------------- */
+
+.how-it-works {
+    padding: 40px 0 20px;
+}
+.section-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+.section-header h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+.section-header p {
+    font-size: 15px;
+    color: var(--muted);
+}
+
+.hiw-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 20px;
+}
+.hiw-step {
+    background: var(--card);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 18px 18px 20px;
+}
+.hiw-step-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    border: 1px solid #1f2937;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+}
+.hiw-step-title {
+    margin: 0 0 8px;
+    font-size: 17px;
+}
+.hiw-step-text {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: var(--muted);
+}
+.hiw-step-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+.hiw-step-bullets li {
+    margin-bottom: 4px;
+}
+.hiw-cta {
+    text-align: center;
+    margin-top: 26px;
+    font-size: 15px;
+    color: var(--muted);
+}
+.hiw-cta a {
+    margin-top: 10px;
 }
 
 /* ---------------- SERVICES ---------------- */
 
 .services {
-    padding: 60px 40px;
+    padding: 50px 0 40px;
 }
 .services h2 {
     text-align: center;
-    font-size: 36px;
+    font-size: 30px;
+    margin-bottom: 6px;
+}
+.services-subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 30px;
 }
 .service-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
     gap: 20px;
-    margin-top: 40px;
 }
 .service-box {
     background: var(--card);
-    padding: 25px;
-    border-radius: 12px;
+    padding: 20px;
+    border-radius: 14px;
     border: 1px solid var(--border);
 }
 .service-box h3 {
     color: var(--primary);
+    font-size: 18px;
+    margin-top: 0;
 }
 .service-box p {
-    opacity: 0.8;
+    opacity: 0.85;
+    font-size: 14px;
+    color: var(--muted);
+}
+.service-tag {
+    display: inline-block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 4px;
 }
 
 /* ---------------- PRICING ---------------- */
 
 .pricing {
-    padding: 60px 40px;
+    padding: 50px 0 40px;
 }
 .pricing h2 {
     text-align: center;
-    font-size: 38px;
+    font-size: 32px;
+    margin-bottom: 6px;
+}
+.pricing-subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 30px;
 }
 .pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
     gap: 25px;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 .price-card {
-    background: var(--card);
-    border-radius: 15px;
-    padding: 30px;
+    background: radial-gradient(circle at top, rgba(0,212,255,0.08), #020617);
+    border-radius: 18px;
+    padding: 24px;
     border: 1px solid var(--border);
 }
 .price-card h3 {
     color: var(--primary);
-    font-size: 28px;
+    font-size: 22px;
+    margin-top: 0;
 }
 .price {
-    font-size: 40px;
-    margin: 20px 0;
+    font-size: 32px;
+    margin: 14px 0;
     color: white;
 }
 .price small {
-    font-size: 16px;
+    font-size: 14px;
     opacity: 0.7;
 }
 .price-card ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted);
 }
 .price-card ul li {
-    padding: 6px 0;
-    opacity: 0.85;
+    padding: 5px 0;
 }
 .add-btn {
     width: 100%;
     padding: 12px;
-    background: var(--primary);
-    color: black;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #020617;
     border: none;
-    border-radius: 10px;
-    margin-top: 20px;
+    border-radius: 999px;
+    margin-top: 18px;
     cursor: pointer;
+    font-weight: 600;
 }
 .add-btn:hover {
-    opacity: 0.7;
+    opacity: 0.9;
 }
 
 /* ---------------- CART ---------------- */
 
 .cart {
-    background: #0a0a0a;
-    padding: 40px;
+    background: #020617;
+    padding: 50px 0 40px;
 }
 .cart h2 {
-    font-size: 32px;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+.cart-subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 16px;
 }
 .cart-box {
     background: var(--card);
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 14px;
     border: 1px solid var(--border);
 }
-.checkout-btn {
-    background: var(--primary);
-    padding: 15px;
-    border-radius: 10px;
-    border: none;
-    width: 100%;
-    margin-top: 20px;
+.cart-item-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 4px 0;
+}
+.cart-item-name {
+    color: var(--text);
+}
+.cart-item-remove {
+    font-size: 12px;
+    color: var(--accent);
     cursor: pointer;
 }
+.checkout-btn {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    padding: 14px;
+    border-radius: 999px;
+    border: none;
+    width: 100%;
+    margin-top: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #020617;
+}
 .checkout-btn:hover {
-    opacity: 0.7;
+    opacity: 0.9;
+}
+.cart-total-label {
+    margin-top: 10px;
+    font-size: 16px;
+}
+#cart-total {
+    font-weight: 600;
+}
+
+/* ---------------- CONTACT ---------------- */
+
+.contact {
+    padding: 40px 0 30px;
+}
+.contact h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 6px;
+}
+.contact p {
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+}
+.contact a {
+    color: var(--accent);
+    text-decoration: none;
+}
+.contact a:hover {
+    text-decoration: underline;
 }
 
 /* ---------------- FOOTER ---------------- */
 
 footer {
-    padding: 40px;
+    padding: 32px 20px 40px;
     text-align: center;
     opacity: 0.6;
+    font-size: 13px;
 }
 
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 768px) {
+    nav {
+        padding: 14px 18px;
+    }
+    nav .logo {
+        font-size: 20px;
+    }
+    nav ul li {
+        margin-left: 12px;
+    }
+    .hero-title {
+        font-size: 32px;
+    }
+    .hero-inner {
+        flex-direction: column;
+    }
+}
 </style>
 
 <script>
@@ -231,20 +536,39 @@ function addToCart(item, price) {
     updateCart();
 }
 
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+
 function updateCart() {
     let box = document.getElementById("cart-items");
     let total = document.getElementById("cart-total");
     box.innerHTML = "";
 
     let sum = 0;
-    cart.forEach(c => {
-        box.innerHTML += `<p>${c.item} — $${c.price}</p>`;
+    cart.forEach((c, index) => {
         sum += c.price;
+        box.innerHTML += `
+            <div class="cart-item-row">
+                <span class="cart-item-name">${c.item} — $${c.price}</span>
+                <span class="cart-item-remove" onclick="removeFromCart(${index})">Remove</span>
+            </div>
+        `;
     });
 
     total.innerHTML = "$" + sum;
 }
 
+function goToCheckout() {
+    if (cart.length === 0) {
+        alert("Your cart is empty. Please add at least one bot or service first.");
+        return;
+    }
+    // For now just show a message.
+    // In the next step we’ll wire this to a real checkout or order form.
+    alert("Checkout integrations coming soon: Stripe (Apple Pay), PayPal, Crypto. \n\nFor now, send your cart + strategy to support@autotradecode.com.");
+}
 </script>
 </head>
 <body>
@@ -253,6 +577,8 @@ function updateCart() {
 <nav>
     <span class="logo">AutoTradeCode</span>
     <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#cart">Cart</a></li>
@@ -261,47 +587,174 @@ function updateCart() {
 </nav>
 
 <!-- HERO SECTION -->
-<div class="hero fade">
-    <h1>Custom Automated Trading Bots</h1>
-    <p>We build powerful, fully customized trading bots for Crypto, Forex & Indices. Premium logic, VPS setup, and automation built for your strategy.</p>
-    <button onclick="document.getElementById('pricing').scrollIntoView()">See Pricing</button>
-</div>
+<section id="hero" class="hero fade">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Custom Trading Automation · Crypto • Forex • Indices</p>
+        <h1 class="hero-title">
+          Turn Your Trading Strategy<br>
+          <span class="hero-highlight">Into a Fully Automated Bot</span>
+        </h1>
+        <p class="hero-subtitle">
+          You send the rules. I send back a clean, documented bot that runs 24/7,
+          executes your plan without emotion, and respects your risk management to the letter.
+        </p>
+
+        <ul class="hero-benefits">
+          <li>✔ Works for scalping, swing, grid, breakout, and algo strategies</li>
+          <li>✔ Compatible with major exchanges & brokers via API (where supported)</li>
+          <li>✔ Clear communication, revisions included, and help to get you live</li>
+        </ul>
+
+        <div class="hero-cta-group">
+          <a href="#pricing" class="btn btn-primary">Choose Your Bot Package</a>
+          <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+        </div>
+
+        <div class="hero-trust">
+          <div class="hero-trust-item">
+            <span class="hero-trust-label">Average delivery</span>
+            <span class="hero-trust-value">3–7 business days</span>
+          </div>
+          <div class="hero-trust-item">
+            <span class="hero-trust-label">Strategies coded</span>
+            <span class="hero-trust-value">50+ custom bots</span>
+          </div>
+          <div class="hero-trust-item">
+            <span class="hero-trust-label">Support</span>
+            <span class="hero-trust-value">Revisions & bug fixes included</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="hero-card">
+          <p class="hero-card-label">Example · From idea to execution</p>
+          <h2 class="hero-card-title">“If price crosses EMA + RSI &lt; 30…” turned into live automation</h2>
+          <ul class="hero-card-list">
+            <li>✔ Your entries, exits & risk exactly as you describe them</li>
+            <li>✔ Ready for backtesting and forward testing on your data</li>
+            <li>✔ Clean structure so it’s easy to extend or edit later</li>
+          </ul>
+          <p class="hero-card-note">
+            You own the code. No profit share, no monthly lock-in — just a custom-built trading bot for your strategy.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS SECTION -->
+<section id="how-it-works" class="how-it-works fade">
+  <div class="container">
+    <div class="section-header">
+      <h2>How AutoTradeCode Works</h2>
+      <p>A simple, transparent process to go from “rules in your head” to a bot that actually runs them.</p>
+    </div>
+
+    <div class="hiw-steps">
+      <!-- Step 1 -->
+      <article class="hiw-step">
+        <div class="hiw-step-number">1</div>
+        <h3 class="hiw-step-title">You Describe Your Strategy</h3>
+        <p class="hiw-step-text">
+          Share your idea in plain English: indicators, timeframes, entry/exit rules, and risk. You can send screenshots,
+          TradingView links, or notes.
+        </p>
+        <ul class="hiw-step-bullets">
+          <li>Indicators, timeframes & markets you trade</li>
+          <li>Exact “IF this THEN that” conditions</li>
+          <li>Stop loss, take profit, filters, and risk rules</li>
+        </ul>
+      </article>
+
+      <!-- Step 2 -->
+      <article class="hiw-step">
+        <div class="hiw-step-number">2</div>
+        <h3 class="hiw-step-title">I Code, Test & Refine</h3>
+        <p class="hiw-step-text">
+          I translate your logic into code, test it on sample data, and confirm the bot behaves as expected. You can request
+          adjustments if something needs to change.
+        </p>
+        <ul class="hiw-step-bullets">
+          <li>Clean, documented code tailored to your platform/API</li>
+          <li>Logic verification against your rules</li>
+          <li>Adjustments and clarifications before delivery</li>
+        </ul>
+      </article>
+
+      <!-- Step 3 -->
+      <article class="hiw-step">
+        <div class="hiw-step-number">3</div>
+        <h3 class="hiw-step-title">Delivery, Setup & Support</h3>
+        <p class="hiw-step-text">
+          You receive the full source code plus instructions to run it. If any bug appears or behavior looks off, I fix it.
+        </p>
+        <ul class="hiw-step-bullets">
+          <li>Source code + basic documentation</li>
+          <li>Guidance on connecting to your broker/exchange</li>
+          <li>Bug fixes & small tweaks after delivery</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="hiw-cta">
+      <p>Ready to automate your trading strategy?</p>
+      <a href="#pricing" class="btn btn-primary">View Packages & Add to Cart</a>
+    </div>
+  </div>
+</section>
 
 <!-- SERVICES SECTION -->
-<div id="services" class="services fade">
-    <h2>Our Services</h2>
+<section id="services" class="services fade">
+  <div class="container">
+    <h2>What We Build for Traders</h2>
+    <p class="services-subtitle">
+      From simple single-indicator bots to complex multi-market systems, AutoTradeCode covers the full automation pipeline.
+    </p>
 
     <div class="service-grid">
         <div class="service-box">
-            <h3>Basic Bot ($49)</h3>
-            <p>1 indicator, 1 pair, simple SL/TP logic.</p>
+            <span class="service-tag">Core service</span>
+            <h3>Custom Bot Development</h3>
+            <p>We turn your exact rules into code. Entries, exits, risk management and filters are coded precisely as you specify, for the exchange or broker you use (where API access is supported).</p>
         </div>
         <div class="service-box">
-            <h3>Pro Bot ($149)</h3>
-            <p>Advanced indicators, trailing stop, ladder TP.</p>
+            <span class="service-tag">Strategy to code</span>
+            <h3>Translating Ideas into Logic</h3>
+            <p>Have a strategy in your head or on TradingView, but not in code? We help you formalize every condition so the bot can run it consistently and without emotion.</p>
         </div>
         <div class="service-box">
-            <h3>Premium Bot ($499)</h3>
-            <p>Elite multi-pair logic, VPS setup, unlimited calls.</p>
+            <span class="service-tag">Optimization</span>
+            <h3>Backtesting & Tuning</h3>
+            <p>We design your bot so it can be backtested and optimized on historical data, letting you validate assumptions and fine-tune parameters before going live.</p>
         </div>
         <div class="service-box">
-            <h3>Debugging / Fixes ($59)</h3>
-            <p>Fix your existing bot. Premium clients pay $29.</p>
+            <span class="service-tag">Infrastructure</span>
+            <h3>VPS & 24/7 Setup</h3>
+            <p>We help you deploy your bot on a VPS so it runs even when your computer is off, with proper environment configuration and basic monitoring in place.</p>
         </div>
         <div class="service-box">
-            <h3>VPS Setup ($39)</h3>
-            <p>We install and configure your bot to run 24/7.</p>
+            <span class="service-tag">Maintenance</span>
+            <h3>Bug Fixes & Upgrades</h3>
+            <p>If your current bot misbehaves, we inspect, debug and fix it. For Premium clients, ongoing improvements and new features can be added as your strategy evolves.</p>
         </div>
         <div class="service-box">
-            <h3>Strategy Consultation ($29)</h3>
-            <p>20 minute call. Premium clients get unlimited free.</p>
+            <span class="service-tag">Consulting</span>
+            <h3>Strategy & Risk Consultation</h3>
+            <p>Short calls to review your idea, check feasibility, and make sure the rules are clear enough for automation before we start building.</p>
         </div>
     </div>
-</div>
+  </div>
+</section>
 
 <!-- PRICING SECTION -->
-<div id="pricing" class="pricing fade">
+<section id="pricing" class="pricing fade">
+  <div class="container">
     <h2>Pricing (USD)</h2>
+    <p class="pricing-subtitle">One-time payment. You keep the code. No subscription, no profit share.</p>
 
     <div class="pricing-grid">
 
@@ -309,9 +762,9 @@ function updateCart() {
             <h3>Basic Bot</h3>
             <div class="price">$49 <small>one-time</small></div>
             <ul>
-                <li>1 Indicator</li>
-                <li>1 Trading Pair</li>
-                <li>SL/TP Logic</li>
+                <li>1 Indicator, 1 trading pair</li>
+                <li>Basic SL/TP logic</li>
+                <li>Good for simple strategies & first bots</li>
             </ul>
             <button class="add-btn" onclick="addToCart('Basic Bot',49)">Add to Cart</button>
         </div>
@@ -320,9 +773,9 @@ function updateCart() {
             <h3>Pro Bot</h3>
             <div class="price">$149 <small>one-time</small></div>
             <ul>
-                <li>Multi-indicators</li>
-                <li>Advanced Logic</li>
-                <li>Ladder TP + Trailing Stop</li>
+                <li>Multiple indicators & conditions</li>
+                <li>Advanced logic, ladder TP & trailing stop</li>
+                <li>Best for serious automated strategies</li>
             </ul>
             <button class="add-btn" onclick="addToCart('Pro Bot',149)">Add to Cart</button>
         </div>
@@ -331,41 +784,52 @@ function updateCart() {
             <h3>Premium Bot</h3>
             <div class="price">$499 <small>one-time</small></div>
             <ul>
-                <li>EVERY feature included</li>
-                <li>Unlimited Consultation Calls</li>
-                <li>VPS Setup Included</li>
-                <li>Debugging 50% Off</li>
+                <li>Everything in Pro, plus:</li>
+                <li>Multi-pair / multi-market logic</li>
+                <li>VPS setup included</li>
+                <li>Ongoing debugging at 50% off</li>
+                <li>Unlimited short consultation calls</li>
             </ul>
             <button class="add-btn" onclick="addToCart('Premium Bot',499)">Add to Cart</button>
         </div>
 
     </div>
-</div>
+  </div>
+</section>
 
 <!-- CART SECTION -->
-<div id="cart" class="cart fade">
+<section id="cart" class="cart fade">
+  <div class="container">
     <h2>Your Cart</h2>
+    <p class="cart-subtitle">Add at least one package above, then proceed to checkout or contact us for a custom quote.</p>
 
     <div class="cart-box">
         <div id="cart-items"></div>
-        <h3>Total: <span id="cart-total">$0</span></h3>
+        <div class="cart-total-label">Total: <span id="cart-total">$0</span></div>
 
-        <button class="checkout-btn" onclick="alert('Checkout integrations coming soon: Stripe (Apple Pay), PayPal, Crypto')">
+        <button class="checkout-btn" onclick="goToCheckout()">
             Proceed to Checkout
         </button>
     </div>
-</div>
+  </div>
+</section>
 
 <!-- CONTACT -->
-<div id="contact" class="services fade">
-    <h2>Contact Us</h2>
-    <p>Email: support@autotradecode.com</p>
-</div>
+<section id="contact" class="contact fade">
+  <div class="container">
+    <h2>Contact & Orders</h2>
+    <p>
+      Ready to start, or need something custom?<br>
+      Email: <a href="mailto:support@autotradecode.com">support@autotradecode.com</a>
+    </p>
+  </div>
+</section>
 
 <footer>
-    AutoTradeCode © 2025 — Custom Trading Automation
+    AutoTradeCode © 2025 — Custom Trading Automation. Nothing here is financial advice. You are responsible for your own trading decisions.
 </footer>
 
 </body>
 </html>
+
 
