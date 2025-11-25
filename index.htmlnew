@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoTradeCode – Custom Trading Bots</title>
+
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #0d0d0d; color: #fff; }
+        header { padding: 20px; background: #111; display: flex; justify-content: space-between; align-items: center; }
+        nav a { margin: 0 12px; text-decoration: none; color: #0af; font-size: 16px; }
+        .hero { text-align: center; padding: 80px 20px; }
+        h1 { font-size: 38px; }
+        .section { padding: 40px 20px; max-width: 900px; margin: auto; }
+        .btn { display: inline-block; background: #0af; padding: 12px 22px; color: #000; border-radius: 6px; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>AUTOTRADECODE</h2>
+    <nav>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a class="btn" href="#request">Request a Bot</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Turn your trading rules into a 24/7 bot that never sleeps.</h1>
+    <p>Your strategy. Your rules. Fully automated.</p>
+</section>
+
+<section class="section" id="features">
+    <h2>Features</h2>
+    <ul>
+        <li>Crypto & FX support</li>
+        <li>Fast execution bots (Java / Python)</li>
+        <li>Laddered take profits</li>
+        <li>Dynamic stop loss</li>
+        <li>VPS deployment so your bot runs 24/7</li>
+    </ul>
+</section>
+
+<section class="section" id="pricing">
+    <h2>Pricing</h2>
+    <p>Custom bots starting from <strong>€49</strong> depending on complexity.</p>
+</section>
+
+<section class="section" id="faq">
+    <h2>FAQ</h2>
+    <p><strong>How does it work?</strong><br>I build your bot exactly based on the rules you send me.</p>
+    <p><strong>How long delivery?</strong><br>24–72 hours.</p>
+</section>
+
+<section class="section" id="request">
+    <h2>Request a Custom Bot</h2>
+    <p>Email: <a href="mailto:autotrade@autotradecode.com">autotrade@autotradecode.com</a></p>
+    <a class="btn" href="mailto:autotrade@autotradecode.com">Request Now</a>
+</section>
+
+</body>
+</html>
