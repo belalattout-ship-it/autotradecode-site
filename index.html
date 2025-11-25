@@ -415,7 +415,83 @@ nav ul li a:hover {
 .add-btn:hover {
     opacity: 0.9;
 }
+<!-- ORDER / PROJECT BRIEF SECTION -->
+<section id="order" class="order fade">
+  <div class="container">
+    <h2>Start Your Custom Bot</h2>
+    <p class="order-subtitle">
+      Choose a package, describe your strategy, and I’ll get back to you by email with any questions and next steps.
+    </p>
 
+    <form class="order-form" action="mailto:support@autotradecode.com" method="post" enctype="text/plain">
+      <!-- Contact info -->
+      <div class="order-grid">
+        <div class="order-field">
+          <label for="name">Your Name</label>
+          <input id="name" name="Name" type="text" required />
+        </div>
+
+        <div class="order-field">
+          <label for="email">Email</label>
+          <input id="email" name="Email" type="email" required />
+        </div>
+
+        <div class="order-field">
+          <label for="platform">Platform / Exchange</label>
+          <input id="platform" name="Platform" type="text" placeholder="Binance, Bybit, MT4, MT5, cTrader, etc." />
+        </div>
+
+        <div class="order-field">
+          <label for="package">Package</label>
+          <select id="package" name="Package">
+            <option value="Basic Bot">Basic Bot ($49)</option>
+            <option value="Pro Bot">Pro Bot ($149)</option>
+            <option value="Premium Bot">Premium Bot ($499)</option>
+            <option value="Not sure">Not sure – need advice</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Strategy description -->
+      <div class="order-field">
+        <label for="markets">Markets / Pairs You Trade</label>
+        <input id="markets" name="Markets" type="text" placeholder="e.g. BTCUSDT, EURUSD, NAS100, XAUUSD" />
+      </div>
+
+      <div class="order-field">
+        <label for="strategy">Describe Your Strategy</label>
+        <textarea id="strategy" name="Strategy" rows="6" placeholder="Explain your rules in plain English. 
+• Indicators and timeframes 
+• Entry conditions 
+• Exit conditions 
+• Stop loss / take profit 
+• Any filters or special rules" required></textarea>
+      </div>
+
+      <div class="order-field">
+        <label for="links">Links / Extra Info (optional)</label>
+        <textarea id="links" name="Links" rows="3" placeholder="TradingView link, screenshots, GitHub repo, existing bot code, etc."></textarea>
+      </div>
+
+      <!-- Terms -->
+      <div class="order-terms">
+        <label>
+          <input type="checkbox" name="AcceptTerms" required />
+          I understand this is a custom coding service and not financial advice. I am responsible for how I use the bot.
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary order-submit">
+        Send Project Details
+      </button>
+
+      <p class="order-note">
+        After you submit, you’ll receive a reply from <strong>support@autotradecode.com</strong> with timing, payment link
+        (Stripe / PayPal / Crypto), and any follow-up questions.
+      </p>
+    </form>
+  </div>
+</section>
 /* ---------------- CART ---------------- */
 
 .cart {
@@ -525,6 +601,84 @@ footer {
     }
 }
 </style>
+/* ---------------- ORDER FORM ---------------- */
+
+.order {
+    padding: 50px 0 40px;
+}
+.order h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+.order-subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 28px;
+}
+.order-form {
+    background: var(--card);
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    padding: 22px 20px;
+}
+.order-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 16px;
+    margin-bottom: 14px;
+}
+.order-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+}
+.order-field label {
+    font-size: 13px;
+    margin-bottom: 4px;
+    color: var(--muted);
+}
+.order-field input,
+.order-field select,
+.order-field textarea {
+    background: #020617;
+    border-radius: 10px;
+    border: 1px solid #1f2937;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+}
+.order-field input:focus,
+.order-field select:focus,
+.order-field textarea:focus {
+    border-color: var(--accent);
+}
+.order-terms {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 6px 0 10px;
+}
+.order-terms input {
+    margin-right: 6px;
+}
+.order-submit {
+    width: 100%;
+    text-align: center;
+    margin-top: 4px;
+}
+.order-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+}
+@media (max-width: 768px) {
+    .order-form {
+        padding: 18px 14px;
+    }
+}
 
 <script>
 /* ---------------- CART SYSTEM ---------------- */
