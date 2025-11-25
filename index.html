@@ -600,13 +600,23 @@ footer {
 </style>
 
 <script>
-/* ---------------- CART SYSTEM + EMAIL CHECKOUT ---------------- */
+/* ---------------- STRIPE PAYMENT LINKS ---------------- */
+/* TODO: Replace these with your real Stripe Payment Links */
+
+const STRIPE_LINKS = {
+    "Basic Bot": "https://buy.stripe.com/your-basic-bot-link",
+    "Pro Bot": "https://buy.stripe.com/your-pro-bot-link",
+    "Premium Bot": "https://buy.stripe.com/your-premium-bot-link"
+};
+
+/* ---------------- CART SYSTEM + STRIPE CHECKOUT ---------------- */
 
 let cart = [];
 let cartTotal = 0;
 
+// We keep only ONE package in the cart (simpler for Stripe)
 function addToCart(item, price) {
-    cart.push({ item, price });
+    cart = [{ item, price }];
     updateCart();
 }
 
@@ -637,7 +647,7 @@ function updateCart() {
 
 function goToCheckout() {
     if (cart.length === 0) {
-        alert("Your cart is empty. Please add at least one package first.");
+        alert("Your cart is empty. Please add one package first.");
         return;
     }
 
@@ -656,15 +666,21 @@ function goToCheckout() {
         return;
     }
 
+    const selected = cart[0];
+    const stripeUrl = STRIPE_LINKS[selected.item];
+
+    if (!stripeUrl) {
+        alert("Stripe link is not set for this package yet. Please contact support@autotradecode.com.");
+        return;
+    }
+
+    // Build email body for your reference
     let body = `New AutoTradeCode Order\n\n`;
     body += `Name: ${name}\n`;
     body += `Email: ${email}\n`;
     body += `Platform/Exchange: ${platform || "Not specified"}\n\n`;
-    body += `Cart:\n`;
-    cart.forEach(c => {
-        body += `- ${c.item}: $${c.price}\n`;
-    });
-    body += `\nTotal: $${cartTotal}\n\n`;
+    body += `Selected Package: ${selected.item}\n`;
+    body += `Total: $${cartTotal}\n\n`;
     body += `Strategy Description:\n${strategy}\n\n`;
     body += `Note: Client confirmed they understand this is a coding service, not financial advice.\n`;
 
@@ -673,7 +689,11 @@ function goToCheckout() {
         "?subject=" + encodeURIComponent("New AutoTradeCode Order") +
         "&body=" + encodeURIComponent(body);
 
-    window.location.href = mailtoLink;
+    // Open email draft in a new tab/window (if possible)
+    window.open(mailtoLink, "_blank");
+
+    // Redirect to Stripe payment page
+    window.location.href = stripeUrl;
 }
 </script>
 </head>
@@ -908,7 +928,7 @@ function goToCheckout() {
   <div class="container">
     <h2>Your Order</h2>
     <p class="cart-subtitle">
-      Add at least one package above, fill in your details and strategy, then send your order. You’ll receive a reply with timing and payment link (Stripe / PayPal / Crypto).
+      Add one package above, fill in your details and strategy, then send your order. You’ll be redirected to secure payment via Stripe.
     </p>
 
     <div class="cart-box">
@@ -950,12 +970,12 @@ function goToCheckout() {
         </div>
 
         <button class="checkout-btn" onclick="goToCheckout()">
-            Send Order via Email
+            Send Order & Pay with Stripe
         </button>
 
         <p class="checkout-note">
-          This will open your email app with your cart and strategy pre-filled to <strong>support@autotradecode.com</strong>.
-          You’ll then receive a payment link and estimated delivery time.
+          Clicking the button will open an email draft to <strong>support@autotradecode.com</strong> with your details,
+          then redirect you to Stripe to complete secure payment for your selected package.
         </p>
     </div>
   </div>
@@ -978,6 +998,3 @@ function goToCheckout() {
 
 </body>
 </html>
-
-
-
