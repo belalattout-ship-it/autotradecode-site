@@ -1,66 +1,800 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoTradeCode – Custom Trading Bots</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoTradeCode – Custom Trading Bots</title>
 
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #0d0d0d; color: #fff; }
-        header { padding: 20px; background: #111; display: flex; justify-content: space-between; align-items: center; }
-        nav a { margin: 0 12px; text-decoration: none; color: #0af; font-size: 16px; }
-        .hero { text-align: center; padding: 80px 20px; }
-        h1 { font-size: 38px; }
-        .section { padding: 40px 20px; max-width: 900px; margin: auto; }
-        .btn { display: inline-block; background: #0af; padding: 12px 22px; color: #000; border-radius: 6px; text-decoration: none; font-weight: bold; }
-    </style>
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #070b1f;
+      --accent: #00f5ff;
+      --accent-soft: rgba(0, 245, 255, 0.12);
+      --accent-2: #4f46e5;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --card-bg: rgba(15, 23, 42, 0.85);
+      --border-subtle: rgba(148, 163, 184, 0.2);
+      --danger: #f97373;
+      --success: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.95),
+        rgba(15, 23, 42, 0.7),
+        transparent
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .nav {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      font-size: 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.18s ease-out;
+    }
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 18px;
+      font-size: 14px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
+        background 0.12s ease-out;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #020617;
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.32);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(56, 189, 248, 0.45);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text-main);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-1px);
+    }
+
+    /* LAYOUT */
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    section {
+      margin-bottom: 72px;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 32px;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-tag-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.9);
+    }
+
+    .hero-title {
+      font-size: 38px;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .hero-title span.highlight {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      max-width: 420px;
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .hero-footnote {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-card {
+      border-radius: 22px;
+      padding: 18px 18px 20px;
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.25), transparent 52%),
+        radial-gradient(circle at 100% 0, rgba(79, 70, 229, 0.28), transparent 55%),
+        rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.95);
+    }
+
+    .hero-card-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      opacity: 0.8;
+      margin-bottom: 6px;
+    }
+
+    .hero-metric {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero-metric span {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+
+    .hero-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .hero-pill {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .hero-card-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* SECTION TITLES */
+    .section-heading {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    /* FEATURE GRID */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 16px 16px 18px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .feature-card-title {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .feature-card-body {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* PACKAGES / ORDER */
+    .package-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .package-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 18px 18px 20px;
+      border: 1px solid var(--border-subtle);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .package-pill {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .package-title {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .package-price {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .package-price span {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+
+    .package-list {
+      list-style: none;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .package-list li::before {
+      content: "• ";
+      color: var(--accent);
+    }
+
+    .badge-popular {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.16);
+      color: var(--success);
+      border: 1px solid rgba(34, 197, 94, 0.5);
+    }
+
+    .package-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .package-footnote {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* ORDER FORM */
+    .order-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .order-form {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 18px 18px 20px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    label {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      background: #020617;
+      border-radius: 10px;
+      border: 1px solid rgba(55, 65, 81, 0.8);
+      padding: 8px 9px;
+      color: var(--text-main);
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .order-side {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .order-side strong {
+      color: var(--text-main);
+    }
+
+    .order-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+
+    .order-pill span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    /* FAQ */
+    .faq-item {
+      margin-bottom: 14px;
+    }
+
+    .faq-q {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .faq-a {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    footer {
+      padding: 16px 20px 40px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+      background: #020617;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        margin-top: 12px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  </style>
 </head>
 
 <body>
-
-<header>
-    <h2>AUTOTRADECODE</h2>
-    <nav>
-        <a href="#features">Features</a>
+  <header>
+    <div class="nav">
+      <div class="brand">AUTOTRADECODE</div>
+      <div class="nav-links">
+        <a href="services.html">Services</a>
         <a href="#pricing">Pricing</a>
+        <a href="#order">Order</a>
         <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
-        <a class="btn" href="#request">Request a Bot</a>
-    </nav>
-</header>
+        <a href="#order" class="btn btn-primary" style="padding-inline:16px;">Request a Bot</a>
+      </div>
+    </div>
+  </header>
 
-<section class="hero">
-    <h1>Turn your trading rules into a 24/7 bot that never sleeps.</h1>
-    <p>Your strategy. Your rules. Fully automated.</p>
-</section>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          <span>Custom-coded trading bots · Crypto & FX · VPS ready</span>
+        </div>
 
-<section class="section" id="features">
-    <h2>Features</h2>
-    <ul>
-        <li>Crypto & FX support</li>
-        <li>Fast execution bots (Java / Python)</li>
-        <li>Laddered take profits</li>
-        <li>Dynamic stop loss</li>
-        <li>VPS deployment so your bot runs 24/7</li>
-    </ul>
-</section>
+        <h1 class="hero-title">
+          Turn your trading rules into a <span class="highlight">24/7 bot</span> that never sleeps.
+        </h1>
 
-<section class="section" id="pricing">
-    <h2>Pricing</h2>
-    <p>Custom bots starting from <strong>€49</strong> depending on complexity.</p>
-</section>
+        <p class="hero-subtitle">
+          You already know how you want to trade. AutoTradeCode turns that into a real bot:
+          entries, exits, trailing stops, take-profit ladders and strict risk limits – then helps
+          you deploy it on a VPS so it runs even when you’re offline.
+        </p>
 
-<section class="section" id="faq">
-    <h2>FAQ</h2>
-    <p><strong>How does it work?</strong><br>I build your bot exactly based on the rules you send me.</p>
-    <p><strong>How long delivery?</strong><br>24–72 hours.</p>
-</section>
+        <div class="hero-actions">
+          <a href="#order" class="btn btn-primary">Start my bot brief</a>
+          <a href="services.html" class="btn btn-ghost">View full services</a>
+        </div>
 
-<section class="section" id="request">
-    <h2>Request a Custom Bot</h2>
-    <p>Email: <a href="mailto:autotrade@autotradecode.com">autotrade@autotradecode.com</a></p>
-    <a class="btn" href="mailto:autotrade@autotradecode.com">Request Now</a>
-</section>
+        <p class="hero-footnote">
+          No “black box signals”. You keep full control of the logic. We just turn it into code.
+        </p>
+      </div>
 
+      <div class="hero-card">
+        <div class="hero-card-title">Current focus</div>
+        <div class="hero-metric">
+          1-to-1 custom bots <span>for serious retail traders</span>
+        </div>
+        <div class="hero-pill-row">
+          <div class="hero-pill">Crypto futures</div>
+          <div class="hero-pill">Spot / FX</div>
+          <div class="hero-pill">Binance · Bybit · OKX</div>
+          <div class="hero-pill">Java · Python</div>
+          <div class="hero-pill">VPS deployment</div>
+        </div>
+        <p class="hero-card-note">
+          You send the strategy rules (or a TradingView screenshot). We design the logic together,
+          code it, test it on paper mode, then help you run it on your own account.
+        </p>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <h2 class="section-heading">Why traders use AutoTradeCode</h2>
+      <p class="section-sub">Think of us as your “developer friend” who only builds trading tools.</p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-card-title">Pure rule-based execution</div>
+          <p class="feature-card-body">
+            Your bot executes the plan exactly. No revenge trades, no FOMO entries, no moving
+            stops “just this once”. You decide the rules. The code enforces them.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-title">Exchange-ready logic</div>
+          <p class="feature-card-body">
+            Built around real order types: market, limit, stop, OCO, take-profit ladders,
+            break-even stops and more – depending on your exchange API.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-title">Risk-first design</div>
+          <p class="feature-card-body">
+            Every bot starts from risk: max loss per trade, daily loss cap, position sizing rules
+            and optional cool-down after a loss streak.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-title">VPS deployment help</div>
+          <p class="feature-card-body">
+            Optional extra: we help you install the bot on a VPS so it trades 24/7 even when your
+            laptop is off.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING / PACKAGES -->
+    <section id="pricing">
+      <h2 class="section-heading">Packages</h2>
+      <p class="section-sub">Pick a starting point. We adjust details during the brief.</p>
+
+      <div class="package-grid">
+        <article class="package-card">
+          <div class="package-pill">Starter</div>
+          <h3 class="package-title">Basic Bot</h3>
+          <div class="package-price">€49 <span>simple rule set</span></div>
+          <ul class="package-list">
+            <li>Single symbol (e.g. BTCUSDT)</li>
+            <li>One clear setup (entry + SL + TP)</li>
+            <li>Fixed position size per trade</li>
+            <li>Paper-trading backtest script</li>
+          </ul>
+          <div class="package-footer">
+            <a href="#order" class="btn btn-ghost" style="padding-inline:14px;">Order Basic</a>
+            <p class="package-footnote">Good for testing a new idea.</p>
+          </div>
+        </article>
+
+        <article class="package-card">
+          <div class="badge-popular">Most requested</div>
+          <div class="package-pill">Active traders</div>
+          <h3 class="package-title">Pro Bot</h3>
+          <div class="package-price">€99 <span>advanced logic</span></div>
+          <ul class="package-list">
+            <li>Multiple conditions (EMA, RSI, volume…)</li>
+            <li>Take-profit ladder + trailing stop</li>
+            <li>Daily loss protection + cool-down</li>
+            <li>Support for multiple pairs</li>
+          </ul>
+          <div class="package-footer">
+            <a href="#order" class="btn btn-primary" style="padding-inline:14px;">Order Pro</a>
+            <p class="package-footnote">Perfect for your main strategy.</p>
+          </div>
+        </article>
+
+        <article class="package-card">
+          <div class="package-pill">Power users</div>
+          <h3 class="package-title">Custom Lab</h3>
+          <div class="package-price">From €149 <span>complex builds</span></div>
+          <ul class="package-list">
+            <li>Multi-time frame logic</li>
+            <li>Portfolio / grid / DCA bots</li>
+            <li>Exchange + VPS setup assistance</li>
+            <li>Priority support while we refine it</li>
+          </ul>
+          <div class="package-footer">
+            <a href="#order" class="btn btn-ghost" style="padding-inline:14px;">Discuss idea</a>
+            <p class="package-footnote">For “I’ve never seen this before” concepts.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ORDER SECTION -->
+    <section id="order">
+      <h2 class="section-heading">Order your custom bot</h2>
+      <p class="section-sub">Fill this brief. We reply by email with questions and a final quote.</p>
+
+      <div class="order-grid">
+        <form
+          class="order-form"
+          method="post"
+          action="mailto:autotrade@autotradecode.com"
+          enctype="text/plain"
+        >
+          <div class="form-row">
+            <div style="flex:1;">
+              <label for="name">Your name</label>
+              <input id="name" name="Name" required />
+            </div>
+            <div style="flex:1;">
+              <label for="email">Email</label>
+              <input id="email" type="email" name="Email" required />
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top:10px;">
+            <div style="flex:1;">
+              <label for="package">Package</label>
+              <select id="package" name="Package">
+                <option>Basic Bot (€49)</option>
+                <option>Pro Bot (€99)</option>
+                <option>Custom Lab (from €149)</option>
+                <option>Not sure, recommend for me</option>
+              </select>
+            </div>
+            <div style="flex:1;">
+              <label for="exchange">Exchange</label>
+              <input id="exchange" name="Exchange" placeholder="Binance, Bybit, OKX…" />
+            </div>
+          </div>
+
+          <div style="margin-top:10px;">
+            <label for="pair">Main pair / symbol</label>
+            <input id="pair" name="Main pair" placeholder="e.g. BTCUSDT, EURUSD…" />
+          </div>
+
+          <div style="margin-top:10px;">
+            <label for="rules">Describe your strategy</label>
+            <textarea
+              id="rules"
+              name="Strategy"
+              placeholder="Entry rules, stop loss logic, take profit, filters (time of day, indicator conditions, news filters…)"
+            ></textarea>
+          </div>
+
+          <div class="form-row" style="margin-top:10px;">
+            <div style="flex:1;">
+              <label for="risk">Max risk per trade (optional)</label>
+              <input id="risk" name="Risk per trade" placeholder="e.g. 1% of account" />
+            </div>
+            <div style="flex:1;">
+              <label for="deadline">When do you need it?</label>
+              <input id="deadline" name="Deadline" placeholder="e.g. within 3 days" />
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="margin-top:14px;">
+            Send bot request
+          </button>
+        </form>
+
+        <div class="order-side">
+          <div class="order-pill">
+            <span class="dot"></span>
+            <span>Manual review · No auto-generated code</span>
+          </div>
+          <p>
+            <strong>What happens next?</strong><br />
+            You send your brief → we reply by email, either with a couple of questions or a final
+            fixed quote. If you’re happy, we start coding.
+          </p>
+          <br />
+          <p>
+            <strong>Delivery format</strong><br />
+            • Source code for your bot (Java or Python)<br />
+            • Simple guide on how to run it<br />
+            • Optional VPS help if you choose that add-on
+          </p>
+          <br />
+          <p style="font-size:12px;color:var(--text-muted);">
+            Bots are tools, not magic money printers. You remain responsible for risk and for
+            monitoring performance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2 class="section-heading">FAQ</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">Do you provide a ready-made “winning strategy”?</div>
+        <p class="faq-a">
+          No. We only code <strong>your</strong> rules. If you don’t have a clear idea yet, we can
+          help you structure it, but we don’t sell signals or secret strategies.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can you connect to my live account?</div>
+        <p class="faq-a">
+          The bot runs using your API keys on your own machine or VPS. We don’t ask for your login,
+          only the API permissions needed for trading according to your exchange’s rules.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How long does it take?</div>
+        <p class="faq-a">
+          Simple bots: ~24–48 hours. More complex builds or anything with unusual logic: we’ll give
+          you a realistic estimate after reading your brief.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> AutoTradeCode. Custom bots for serious retail traders.
+    &nbsp;|&nbsp;
+    <a href="mailto:autotrade@autotradecode.com">autotrade@autotradecode.com</a>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </footer>
 </body>
 </html>
