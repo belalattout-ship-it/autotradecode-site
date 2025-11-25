@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services – AutoTradeCode</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 50%, #000 100%);
+      color: #f9fafb;
+    }
+    a { color: inherit; text-decoration: none; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to bottom, rgba(15,23,42,0.95), rgba(15,23,42,0.75), transparent);
+      border-bottom: 1px solid rgba(148,163,184,0.2);
+    }
+    .nav {
+      max-width: 1080px; margin: 0 auto; padding: 14px 20px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .brand { font-weight: 800; letter-spacing: 0.12em; font-size: 18px; }
+    .nav-links { display:flex; gap:18px; font-size:14px; }
+    .nav-links a { color:#9ca3af; }
+    .nav-links a:hover { color:#fff; }
+    .btn {
+      padding: 8px 16px; border-radius:999px; border:none;
+      background: linear-gradient(135deg,#00f5ff,#4f46e5); color:#020617;
+      font-size:14px; font-weight:600; cursor:pointer;
+    }
+    main { max-width: 1080px; margin: 0 auto; padding: 40px 20px 80px; }
+    h1 { font-size: 32px; margin-bottom: 6px; }
+    .lead { color:#9ca3af; margin-bottom: 26px; max-width:600px; }
+    .grid { display:grid; grid-template-columns: minmax(0,2.2fr) minmax(0,1.4fr); gap:26px; }
+    .card {
+      background: rgba(15,23,42,0.95);
+      border-radius: 20px;
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(148,163,184,0.3);
+    }
+    h2 { font-size:20px; margin-bottom:8px; }
+    h3 { font-size:16px; margin:14px 0 6px; }
+    p { font-size:14px; color:#d1d5db; line-height:1.5; }
+    ul { font-size:14px; color:#9ca3af; padding-left:18px; }
+    li { margin-bottom:4px; }
+    .pill { display:inline-block; font-size:11px; padding:4px 9px; border-radius:999px;
+      border:1px solid rgba(56,189,248,0.5); color:#e5e7eb; margin-bottom:8px; }
+    .link-row { margin-top:20px; font-size:14px; }
+    .link-row a { color:#22d3ee; }
+    @media(max-width:840px){ .grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">AUTOTRADECODE</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#order">Order</a>
+      <button class="btn" onclick="location.href='index.html#order'">Request a Bot</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1>Services</h1>
+  <p class="lead">
+    AutoTradeCode turns your trading ideas into real code and helps you actually run them
+    – from the first sketch of your rules to a bot running on your own VPS.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <span class="pill">What we build</span>
+      <h2>Custom-built trading bots</h2>
+      <p>
+        Every build starts from your rules: entries, exits, risk per trade and management logic.
+        We don’t sell generic “alpha bots” – everything is wired around your way of trading.
+      </p>
+
+      <h3>Typical projects</h3>
+      <ul>
+        <li>Trend-following bots with EMA / RSI / volume filters</li>
+        <li>Scalping bots for specific sessions (London / NY open etc.)</li>
+        <li>DCA / grid systems with safety orders and take-profit ladders</li>
+        <li>FX bots based on session ranges or breakouts</li>
+      </ul>
+
+      <h3>Tech stack</h3>
+      <ul>
+        <li>Languages: Java or Python (your choice)</li>
+        <li>Exchanges: Binance, Bybit, OKX and others with public APIs</li>
+        <li>Execution: REST/WebSocket APIs with proper error handling</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="pill">Delivery & support</span>
+      <h2>How the process works</h2>
+      <h3>1. Strategy brief</h3>
+      <p>You send your idea via the order form. The clearer the rules, the better.</p>
+
+      <h3>2. Quote & confirmation</h3>
+      <p>We reply with questions (if needed) and a fixed price based on complexity.</p>
+
+      <h3>3. Build & test</h3>
+      <p>We code the bot, then run it in paper / sandbox mode to make sure it behaves as expected.</p>
+
+      <h3>4. Delivery & optional VPS setup</h3>
+      <p>
+        You receive the source code, a short “how to run” guide, and optional live call
+        where we help you deploy it on your own VPS.
+      </p>
+
+      <div class="link-row">
+        Ready to start? <a href="index.html#order">Fill the bot brief →</a>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
