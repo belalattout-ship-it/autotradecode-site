@@ -601,13 +601,20 @@ footer {
 
 <script>
 /* ---------------- STRIPE PAYMENT LINKS ---------------- */
-/* TODO: Replace these with your real Stripe Payment Links */
 
 const STRIPE_LINKS = {
-    "Basic Bot": "https://buy.stripe.com/your-basic-bot-link",
-    "Pro Bot": "https://buy.stripe.com/your-pro-bot-link",
-    "Premium Bot": "https://buy.stripe.com/your-premium-bot-link"
+    "Basic Bot": "https://buy.stripe.com/6oU5kw5I8gnPgOkdKYaEE03",
+    "Pro Bot": "https://buy.stripe.com/14A28k1rSb3v9lS8qEaEE02",
+    "Premium Bot": "https://buy.stripe.com/9B68wI2vWdbD8hO8qEaEE01"
 };
+
+function checkout(productName) {
+    if (STRIPE_LINKS[productName]) {
+        window.location.href = STRIPE_LINKS[productName];
+    } else {
+        alert("This product does not have a payment link.");
+    }
+}
 
 /* ---------------- CART SYSTEM + STRIPE CHECKOUT ---------------- */
 
@@ -687,7 +694,7 @@ function goToCheckout() {
     const mailtoLink =
         "mailto:support@autotradecode.com" +
         "?subject=" + encodeURIComponent("New AutoTradeCode Order") +
-        "&body=" + encodeURIComponent(body);
+        "&body" + encodeURIComponent(body);
 
     // Open email draft in a new tab/window (if possible)
     window.open(mailtoLink, "_blank");
