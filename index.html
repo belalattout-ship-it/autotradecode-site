@@ -350,6 +350,38 @@ nav ul li a:hover {
     margin-bottom: 4px;
 }
 
+/* ---------------- FREE REVIEW ---------------- */
+
+.review {
+    padding: 32px 0 30px;
+}
+.review-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 20px;
+}
+.review-card {
+    background: var(--card);
+    padding: 18px 16px 20px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+}
+.review-card h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: var(--primary);
+}
+.review-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: var(--muted);
+}
+.review-list li {
+    margin-bottom: 4px;
+}
+
 /* ---------------- PRICING ---------------- */
 
 .pricing {
@@ -365,6 +397,13 @@ nav ul li a:hover {
     font-size: 14px;
     color: var(--muted);
     margin-bottom: 24px;
+}
+.pricing-category {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 10px;
 }
 .pricing-grid {
     display: grid;
@@ -545,7 +584,7 @@ nav ul li a:hover {
     margin-top: 8px;
 }
 
-/* ---------------- CONTACT ---------------- */
+/* ---------------- CONTACT / CALL ---------------- */
 
 .contact {
     padding: 32px 0 26px;
@@ -566,6 +605,28 @@ nav ul li a:hover {
 }
 .contact a:hover {
     text-decoration: underline;
+}
+
+/* ---------------- FAQ ---------------- */
+
+.faq {
+    padding: 40px 0 30px;
+}
+.faq-item {
+    background: var(--card);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 14px 16px 16px;
+}
+.faq-question {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 6px;
+}
+.faq-answer {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0;
 }
 
 /* ---------------- FOOTER ---------------- */
@@ -596,6 +657,9 @@ footer {
     .hero-inner {
         flex-direction: column;
     }
+    .review-grid {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 
@@ -605,14 +669,18 @@ footer {
 const STRIPE_LINKS = {
     "Basic Bot": "https://buy.stripe.com/6oU5kw5I8gnPgOkdKYaEE03",
     "Pro Bot": "https://buy.stripe.com/14A28k1rSb3v9lS8qEaEE02",
-    "Premium Bot": "https://buy.stripe.com/9B68wI2vWdbD8hO8qEaEE01"
+    "Premium Bot": "https://buy.stripe.com/9B68wI2vWdbD8hO8qEaEE01",
+    "Indicator / Alert Script": "https://buy.stripe.com/00wcMY1rSb3v55C36kaEE05",
+    "Bot Debug Session": "https://buy.stripe.com/eVq6oAb2s3B3apWeP2aEE06",
+    "Strategy Call (30 minutes)": "https://buy.stripe.com/7sYdR2daA0oRdC8bCQaEE04",
+    "VPS Setup & Deployment": "https://buy.stripe.com/00w7sE4E4dbD0Pm8qEaEE07"
 };
 
 function checkout(productName) {
     if (STRIPE_LINKS[productName]) {
         window.location.href = STRIPE_LINKS[productName];
     } else {
-        alert("This product does not have a payment link.");
+        alert("This service does not have a payment link yet.");
     }
 }
 
@@ -621,7 +689,7 @@ function checkout(productName) {
 let cart = [];
 let cartTotal = 0;
 
-// We keep only ONE package in the cart (simpler for Stripe)
+// We keep only ONE bot package in the cart (simpler for Stripe)
 function addToCart(item, price) {
     cart = [{ item, price }];
     updateCart();
@@ -654,7 +722,7 @@ function updateCart() {
 
 function goToCheckout() {
     if (cart.length === 0) {
-        alert("Your cart is empty. Please add one package first.");
+        alert("Your cart is empty. Please add a bot package first.");
         return;
     }
 
@@ -682,7 +750,7 @@ function goToCheckout() {
     }
 
     // Build email body for your reference
-    let body = `New AutoTradeCode Order\n\n`;
+    let body = `New AutoTradeCode Bot Order\n\n`;
     body += `Name: ${name}\n`;
     body += `Email: ${email}\n`;
     body += `Platform/Exchange: ${platform || "Not specified"}\n\n`;
@@ -693,14 +761,43 @@ function goToCheckout() {
 
     const mailtoLink =
         "mailto:contact@autotradecode.com" +
-        "?subject=" + encodeURIComponent("New AutoTradeCode Order") +
-        "&body" + encodeURIComponent(body);
+        "?subject=" + encodeURIComponent("New AutoTradeCode Bot Order") +
+        "&body=" + encodeURIComponent(body);
 
-    // Open email draft in a new tab/window (if possible)
+    // Open email draft (client can send it)
     window.open(mailtoLink, "_blank");
 
     // Redirect to Stripe payment page
     window.location.href = stripeUrl;
+}
+
+/* ---------------- FREE STRATEGY REVIEW FORM ---------------- */
+
+function sendReview() {
+    const name = document.getElementById("review-name").value.trim();
+    const email = document.getElementById("review-email").value.trim();
+    const platform = document.getElementById("review-platform").value.trim();
+    const timeframe = document.getElementById("review-timeframe").value.trim();
+    const strategy = document.getElementById("review-strategy").value.trim();
+
+    if (!email || !strategy) {
+        alert("Please add at least your email and a basic strategy description.");
+        return;
+    }
+
+    let body = `Free Strategy Review Request\n\n`;
+    body += `Name: ${name || "Not provided"}\n`;
+    body += `Email: ${email}\n`;
+    body += `Platform/Exchange: ${platform || "Not provided"}\n`;
+    body += `Main timeframe(s): ${timeframe || "Not provided"}\n\n`;
+    body += `Strategy description:\n${strategy}\n`;
+
+    const mailtoLink =
+        "mailto:contact@autotradecode.com" +
+        "?subject=" + encodeURIComponent("Free Strategy Review Request") +
+        "&body=" + encodeURIComponent(body);
+
+    window.location.href = mailtoLink;
 }
 </script>
 </head>
@@ -743,6 +840,7 @@ function goToCheckout() {
         <div class="hero-cta-group">
           <a href="#pricing" class="btn btn-primary">Choose Your Bot Package</a>
           <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+          <a href="#review" class="btn btn-secondary">Free Strategy Review</a>
         </div>
 
         <div class="hero-trust">
@@ -850,33 +948,94 @@ function goToCheckout() {
         <div class="service-box">
             <span class="service-tag">Core service</span>
             <h3>Custom Bot Development</h3>
-            <p>We turn your strategy into code with precise entries, exits and risk management. Perfect for traders who know their rules but need a developer to automate them.</p>
+            <p>We turn your strategy into code with precise entries, exits and risk management. Ideal if you already trade a rule-based system and want a bot to execute it 24/7.</p>
         </div>
         <div class="service-box">
-            <span class="service-tag">Translation</span>
+            <span class="service-tag">Clarity</span>
             <h3>From Idea to Logic</h3>
-            <p>If your strategy is in your head or on TradingView, we help you express it in clear “IF this THEN that” logic so it can be coded and tested properly.</p>
+            <p>If your strategy is mostly in your head or on TradingView, we help you express it in clear “IF this THEN that” logic so it can be coded and tested properly.</p>
         </div>
         <div class="service-box">
-            <span class="service-tag">Optimization</span>
-            <h3>Backtest-Friendly Structure</h3>
-            <p>Your bot is built so you can run backtests and optimize parameters on historical data, validating your idea before you risk real capital.</p>
+            <span class="service-tag">Indicators & Alerts</span>
+            <h3>Indicator / Alert Scripts</h3>
+            <p>Get a custom TradingView indicator or alert script that matches your rules. Perfect if you want visual confirmation and alerts before upgrading to a full bot.</p>
         </div>
         <div class="service-box">
             <span class="service-tag">Infrastructure</span>
             <h3>VPS & 24/7 Setup</h3>
-            <p>We help you run your bot on a VPS so it trades even when your computer is off, with the environment configured correctly for your platform.</p>
+            <p>We help you run your bot on a VPS so it trades even when your computer is off, with everything configured correctly for your platform. Available as a separate add-on service.</p>
         </div>
         <div class="service-box">
             <span class="service-tag">Maintenance</span>
             <h3>Debugging & Upgrades</h3>
-            <p>If your existing bot has bugs or strange behavior, we inspect, debug and fix it. Premium clients also get cheaper upgrades as their strategy evolves.</p>
+            <p>If your existing bot has bugs or strange behavior, we inspect, debug and fix it. Future improvements can be added on top of a cleaned-up, documented codebase.</p>
         </div>
         <div class="service-box">
             <span class="service-tag">Consulting</span>
             <h3>Strategy & Tech Calls</h3>
-            <p>Short calls to check feasibility, talk through risk rules, and make sure the automation matches what you actually want your bot to do.</p>
+            <p>Short calls to check feasibility, talk through risk rules, and make sure the automation matches what you actually want your bot to do. Great if you want guidance before committing.</p>
         </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE STRATEGY REVIEW SECTION -->
+<section id="review" class="review fade">
+  <div class="container">
+    <div class="section-header">
+      <h2>Free Strategy Feasibility Review</h2>
+      <p>Send your idea in plain English, and get feedback on whether it’s ready to automate, what’s missing, and which package fits best.</p>
+    </div>
+
+    <div class="review-grid">
+      <div class="review-card">
+        <h3>What You’ll Get</h3>
+        <ul class="review-list">
+          <li>✔ Confirmation if your strategy is code-ready</li>
+          <li>✔ Suggestions to make your rules more precise</li>
+          <li>✔ Recommendation for platform & bot type</li>
+          <li>✔ Which package (Basic / Pro / Premium) fits</li>
+        </ul>
+        <p class="review-text" style="font-size:14px;color:var(--muted);">
+          This is not financial advice or performance analysis. It’s a technical review focused on turning your idea into clear, implementable logic.
+        </p>
+      </div>
+
+      <div class="review-card">
+        <h3>Describe Your Strategy</h3>
+        <div class="order-field">
+          <label for="review-name">Your Name (optional)</label>
+          <input id="review-name" type="text" placeholder="John Trader" />
+        </div>
+        <div class="order-field">
+          <label for="review-email">Email *</label>
+          <input id="review-email" type="email" placeholder="you@example.com" />
+        </div>
+        <div class="order-mini-grid" style="margin-top:8px;">
+          <div class="order-field">
+            <label for="review-platform">Platform / Exchange</label>
+            <input id="review-platform" type="text" placeholder="Binance, Bybit, MT4, MT5, TradingView, etc." />
+          </div>
+          <div class="order-field">
+            <label for="review-timeframe">Main Timeframe(s)</label>
+            <input id="review-timeframe" type="text" placeholder="e.g. M15, H1, H4" />
+          </div>
+        </div>
+        <div class="order-field">
+          <label for="review-strategy">Strategy Description *</label>
+          <textarea id="review-strategy" rows="4" placeholder="Explain your idea in plain English:
+• Markets you trade
+• Indicators and timeframes
+• Entry and exit rules
+• Risk management (SL/TP, position size)"></textarea>
+        </div>
+        <button class="checkout-btn" style="margin-top:10px;" onclick="sendReview()">
+          Send for Free Review
+        </button>
+        <p class="checkout-note">
+          This will open an email draft to <strong>contact@autotradecode.com</strong> with your details. You can edit it before sending.
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -885,8 +1044,56 @@ function goToCheckout() {
 <section id="pricing" class="pricing fade">
   <div class="container">
     <h2>Pricing (USD)</h2>
-    <p class="pricing-subtitle">One-time payment. You keep the code. No subscription, no profit share.</p>
+    <p class="pricing-subtitle">One-time payments. You keep the code. No subscription, no profit share.</p>
 
+    <p class="pricing-category">Starter services</p>
+    <div class="pricing-grid">
+        <div class="price-card">
+            <h3>Strategy Call (30 minutes)</h3>
+            <div class="price">$25 <small>one-time</small></div>
+            <ul>
+                <li>Talk through your idea live</li>
+                <li>Check if it’s ready to automate</li>
+                <li>Get guidance on next steps & package</li>
+            </ul>
+            <button class="add-btn" onclick="checkout('Strategy Call (30 minutes)')">Book Call</button>
+        </div>
+
+        <div class="price-card">
+            <h3>Indicator / Alert Script</h3>
+            <div class="price">$39 <small>one-time</small></div>
+            <ul>
+                <li>Custom TradingView indicator or alerts</li>
+                <li>Visual signals for your rules</li>
+                <li>Perfect before going full automation</li>
+            </ul>
+            <button class="add-btn" onclick="checkout('Indicator / Alert Script')">Order Indicator</button>
+        </div>
+
+        <div class="price-card">
+            <h3>Bot Debug Session</h3>
+            <div class="price">$59 <small>one-time</small></div>
+            <ul>
+                <li>Fix bugs in your existing bot</li>
+                <li>Clean up structure and logic</li>
+                <li>Minor improvements included</li>
+            </ul>
+            <button class="add-btn" onclick="checkout('Bot Debug Session')">Fix My Bot</button>
+        </div>
+
+        <div class="price-card">
+            <h3>VPS Setup & Deployment</h3>
+            <div class="price">$69 <small>one-time</small></div>
+            <ul>
+                <li>Full VPS installation & configuration</li>
+                <li>Bot deployed to run 24/7</li>
+                <li>No server headache for you</li>
+            </ul>
+            <button class="add-btn" onclick="checkout('VPS Setup & Deployment')">Get VPS Setup</button>
+        </div>
+    </div>
+
+    <p class="pricing-category" style="margin-top:26px;">Bot packages</p>
     <div class="pricing-grid">
 
         <div class="price-card">
@@ -897,7 +1104,7 @@ function goToCheckout() {
                 <li>Basic SL/TP logic</li>
                 <li>Simple entry & exit rules</li>
             </ul>
-            <button class="add-btn" onclick="addToCart('Basic Bot',49)">Add to Cart</button>
+            <button class="add-btn" onclick="addToCart('Basic Bot',49)">Add to Bot Order</button>
         </div>
 
         <div class="price-card highlight">
@@ -909,7 +1116,7 @@ function goToCheckout() {
                 <li>Ladder TP, trailing stop, filters</li>
                 <li>Best for serious automated strategies</li>
             </ul>
-            <button class="add-btn" onclick="addToCart('Pro Bot',149)">Add to Cart</button>
+            <button class="add-btn" onclick="addToCart('Pro Bot',149)">Add to Bot Order</button>
             <p class="price-note">Recommended if you already trade a rule-based strategy manually.</p>
         </div>
 
@@ -923,7 +1130,7 @@ function goToCheckout() {
                 <li>Debugging 50% off for future changes</li>
                 <li>Unlimited short consultation calls</li>
             </ul>
-            <button class="add-btn" onclick="addToCart('Premium Bot',499)">Add to Cart</button>
+            <button class="add-btn" onclick="addToCart('Premium Bot',499)">Add to Bot Order</button>
         </div>
 
     </div>
@@ -933,9 +1140,9 @@ function goToCheckout() {
 <!-- CART + ORDER SECTION -->
 <section id="cart" class="cart fade">
   <div class="container">
-    <h2>Your Order</h2>
+    <h2>Your Bot Order</h2>
     <p class="cart-subtitle">
-      Add one package above, fill in your details and strategy, then send your order. You’ll be redirected to secure payment via Stripe.
+      Choose a bot package above, then fill in your details and strategy. You’ll send an email summary and be redirected to secure payment via Stripe.
     </p>
 
     <div class="cart-box">
@@ -1164,6 +1371,22 @@ function goToCheckout() {
         </p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- STRATEGY CALL SECTION -->
+<section class="contact fade">
+  <div class="container">
+    <h2>Want to Talk First?</h2>
+    <p>
+      If you’re not sure which package fits your idea, you can book a short strategy call.<br />
+      We’ll review your concept, answer questions, and suggest the best next step.
+    </p>
+    <p>
+      <button class="btn btn-primary" onclick="checkout('Strategy Call (30 minutes)')">
+        Book a 30-Minute Strategy Call
+      </button>
+    </p>
   </div>
 </section>
 
