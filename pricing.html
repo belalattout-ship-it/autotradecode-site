@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AutoTradeCode – Pricing & Packages</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-main: #020617;
+  --bg-card: #020617;
+  --accent: #1d4ed8;
+  --accent-soft: rgba(37,99,235,0.22);
+  --border-subtle: rgba(148,163,184,0.28);
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #020617 0, #020617 45%, #000000 100%);
+  color: var(--text-main);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+h1, h2, h3, .logo {
+  font-family: "Sora", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* NAV */
+
+nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+  backdrop-filter: blur(16px);
+  background: linear-gradient(to bottom, rgba(15,23,42,0.9), rgba(15,23,42,0.75), transparent);
+  border-bottom: 1px solid rgba(15,23,42,0.9);
+}
+nav .nav-inner {
+  width: 100%;
+  max-width: 1120px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-size: 18px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+.logo span {
+  color: var(--accent);
+}
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  display: inline-block;
+  margin-left: 18px;
+}
+nav ul li a {
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 6px 8px;
+  border-radius: 999px;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+nav ul li a:hover {
+  color: #e5e7eb;
+  background: rgba(15,23,42,0.85);
+}
+.nav-cta {
+  font-size: 13px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(37,99,235,0.8);
+  color: #e5e7eb;
+  text-decoration: none;
+  background: radial-gradient(circle at top left, rgba(37,99,235,0.45), rgba(15,23,42,0.95));
+}
+
+.nav-toggle {
+  display: none;
+  background: rgba(15,23,42,0.85);
+  color: #e5e7eb;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.5);
+  padding: 6px 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@media (max-width:768px) {
+  nav ul {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 16px;
+    background: #020617;
+    border-radius: 14px;
+    border: 1px solid rgba(15,23,42,0.9);
+    padding: 10px 12px;
+    box-shadow: 0 18px 35px rgba(15,23,42,0.9);
+  }
+  nav ul li {
+    display: block;
+    margin: 4px 0;
+  }
+  nav.nav-open ul {
+    display: block;
+  }
+  .nav-cta {
+    display: none;
+  }
+  .nav-toggle {
+    display: inline-block;
+  }
+}
+
+/* BUTTONS */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.14s ease, border-color 0.14s ease, background 0.14s ease;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #2563eb);
+  color: #e5e7eb;
+  box-shadow: 0 12px 30px rgba(37,99,235,0.45);
+}
+.btn-primary:hover {
+  filter: brightness(0.97);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px rgba(37,99,235,0.55);
+}
+.btn-ghost {
+  background: rgba(15,23,42,0.9);
+  border-color: rgba(148,163,184,0.6);
+  color: var(--text-main);
+}
+.btn-ghost:hover {
+  background: rgba(15,23,42,0.98);
+  border-color: var(--accent);
+}
+
+/* CARDS */
+
+.card {
+  background: #020617;
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+}
+
+.card-alt {
+  background: radial-gradient(circle at top left, rgba(37,99,235,0.15), #020617);
+  border-radius: 16px;
+  border: 1px solid rgba(59,130,246,0.6);
+}
+
+.card-hover {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(15,23,42,0.9);
+  border-color: rgba(59,130,246,0.7);
+}
+
+/* HERO/INTRO */
+
+.hero {
+  padding: 96px 0 32px;
+}
+.hero-title {
+  font-size: 32px;
+  margin: 0 0 8px;
+}
+.hero-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  max-width: 540px;
+}
+.hero-kicker {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+/* SECURE BAND */
+
+.secure-band {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.secure-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.45);
+  background: rgba(15,23,42,0.96);
+}
+
+/* PRICING GRIDS */
+
+.section {
+  padding: 28px 0;
+}
+
+.section-header {
+  margin-bottom: 18px;
+}
+.section-kicker {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.section-title {
+  font-size: 22px;
+  margin: 4px 0;
+}
+.section-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  max-width: 540px;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 16px;
+}
+
+.price-card {
+  padding: 18px 18px 18px;
+}
+.price-label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.price-title {
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+.price-num {
+  font-size: 26px;
+  margin: 8px 0;
+}
+.price-num small {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.price-list {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding-left: 16px;
+  margin: 8px 0 10px;
+}
+.price-list li {
+  margin-bottom: 4px;
+}
+.price-note {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* MOST POPULAR BADGE */
+
+.badge-popular {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(37,99,235,0.15);
+  border: 1px solid rgba(59,130,246,0.7);
+  color: #bfdbfe;
+}
+
+/* PACKAGES COMPARE TABLE */
+
+.compare-card {
+  padding: 16px;
+}
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.compare-table th,
+.compare-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(30,41,59,0.9);
+}
+.compare-table th {
+  text-align: left;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+/* CART + ORDER */
+
+.cart-section {
+  padding: 30px 0 32px;
+}
+.cart-layout {
+  display: grid;
+  grid-template-columns: minmax(0,1.1fr) minmax(0,1.1fr);
+  gap: 18px;
+}
+@media (max-width: 900px) {
+  .hero-grid,
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cart-box {
+  padding: 18px;
+}
+
+.cart-title {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+.cart-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.cart-item-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  padding: 4px 0;
+}
+.cart-item-remove {
+  font-size: 11px;
+  color: #60a5fa;
+  cursor: pointer;
+}
+.cart-total-label {
+  margin-top: 8px;
+  font-size: 14px;
+}
+#cart-total {
+  font-weight: 600;
+}
+
+.order-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+.field label {
+  font-size: 12px;
+  margin-bottom: 3px;
+  color: var(--text-muted);
+}
+.field input,
+.field textarea {
+  background: #020617;
+  border-radius: 10px;
+  border: 1px solid rgba(30,64,175,0.6);
+  padding: 8px 10px;
+  font-size: 13px;
+  color: var(--text-main);
+  outline: none;
+}
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+}
+
+.terms {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 6px 0 8px;
+}
+.terms input {
+  margin-right: 4px;
+}
+
+/* FOOTER */
+
+footer {
+  border-top: 1px solid rgba(15,23,42,1);
+  padding: 18px 20px 26px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+}
+</style>
+
+<script>
+// STRIPE LINKS – SAME AS YOUR ORIGINAL
+const STRIPE_LINKS = {
+  "Basic Bot": "https://buy.stripe.com/6oU5kw5I8gnPgOkdKYaEE03",
+  "Pro Bot": "https://buy.stripe.com/14A28k1rSb3v9lS8qEaEE02",
+  "Premium Bot": "https://buy.stripe.com/9B68wI2vWdbD8hO8qEaEE01",
+  "Indicator / Alert Script": "https://buy.stripe.com/00wcMY1rSb3v55C36kaEE05",
+  "Bot Debug Session": "https://buy.stripe.com/eVq6oAb2s3B3apWeP2aEE06",
+  "Strategy Call (30 minutes)": "https://buy.stripe.com/7sYdR2daA0oRdC8bCQaEE04",
+  "VPS Setup & Deployment": "https://buy.stripe.com/00w7sE4E4dbD0Pm8qEaEE07"
+};
+
+// SIMPLE DIRECT CHECKOUT (NO CART)
+function directCheckout(productName) {
+  const url = STRIPE_LINKS[productName];
+  if (!url) {
+    alert("Stripe link not set for this service yet.");
+    return;
+  }
+  window.location.href = url;
+}
+
+// CART JUST FOR BOT PACKAGES (ONE AT A TIME)
+let cart = [];
+let cartTotal = 0;
+
+function addToCart(item, price) {
+  cart = [{ item, price }];
+  updateCart();
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCart();
+}
+
+function updateCart() {
+  const box = document.getElementById("cart-items");
+  const totalEl = document.getElementById("cart-total");
+  box.innerHTML = "";
+
+  let sum = 0;
+  cart.forEach((c, index) => {
+    sum += c.price;
+    box.innerHTML += `
+      <div class="cart-item-row">
+        <span>${c.item} — $${c.price}</span>
+        <span class="cart-item-remove" onclick="removeFromCart(${index})">Remove</span>
+      </div>
+    `;
+  });
+
+  cartTotal = sum;
+  totalEl.textContent = "$" + sum;
+}
+
+function goToCheckout() {
+  if (cart.length === 0) {
+    alert("Please select a bot package first.");
+    return;
+  }
+
+  const name = document.getElementById("order-name").value.trim();
+  const email = document.getElementById("order-email").value.trim();
+  const platform = document.getElementById("order-platform").value.trim();
+  const strategy = document.getElementById("order-strategy").value.trim();
+  const terms = document.getElementById("order-terms").checked;
+
+  if (!name || !email || !strategy) {
+    alert("Please fill in your name, email and strategy description.");
+    return;
+  }
+  if (!terms) {
+    alert("Please confirm that you understand this is not financial advice.");
+    return;
+  }
+
+  const selected = cart[0];
+  const stripeUrl = STRIPE_LINKS[selected.item];
+  if (!stripeUrl) {
+    alert("Stripe link is not set for this package yet.");
+    return;
+  }
+
+  let body = `New AutoTradeCode Bot Order\n\n`;
+  body += `Name: ${name}\n`;
+  body += `Email: ${email}\n`;
+  body += `Platform/Exchange: ${platform || "Not specified"}\n\n`;
+  body += `Selected Package: ${selected.item}\n`;
+  body += `Total: $${cartTotal}\n\n`;
+  body += `Strategy Description:\n${strategy}\n\n`;
+  body += `Note: Client confirmed they understand this is a coding service, not financial advice.\n`;
+
+  const mailtoLink =
+    "mailto:contact@autotradecode.com" +
+    "?subject=" + encodeURIComponent("New AutoTradeCode Bot Order") +
+    "&body=" + encodeURIComponent(body);
+
+  window.open(mailtoLink, "_blank");
+  window.location.href = stripeUrl;
+}
+
+function toggleNav() {
+  const nav = document.querySelector('nav');
+  nav.classList.toggle('nav-open');
+}
+</script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">AUTO<span>TRADE</span>CODE</div>
+    <ul>
+      <li><a href="index.html#hero">Home</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#process">Process</a></li>
+      <li><a href="index.html#examples">Examples</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNav()">☰</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-kicker">Pricing & packages</div>
+        <h1 class="hero-title">Choose how you want to automate</h1>
+        <p class="hero-subtitle">
+          Clear, one-time pricing. You keep the code. No profit share, no monthly lock-in.
+          Add-on services are available if you need indicators, debugging or VPS deployment.
+        </p>
+        <div class="secure-band">
+          <div class="secure-pill">🔒 Secure checkout via Stripe – card details never touch this site.</div>
+        </div>
+      </div>
+      <div class="card-alt" style="padding:16px 18px 18px;">
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:6px;">
+          Not sure which option fits? You can start with a strategy call or indicator, and upgrade later.
+        </div>
+        <button class="btn btn-primary" style="width:100%;margin-bottom:8px;" onclick="directCheckout('Strategy Call (30 minutes)')">
+          Book a 30-Minute Strategy Call ($25)
+        </button>
+        <button class="btn btn-ghost" style="width:100%;" onclick="location.href='mailto:contact@autotradecode.com'">
+          Ask a question by email
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STARTER SERVICES -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-kicker">Add-on & starter services</div>
+      <h2 class="section-title">For signals, fixes and infrastructure</h2>
+      <p class="section-subtitle">
+        These options are ideal if you’re not ready for a full bot yet, or if you already have code and need it upgraded.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="card card-hover price-card">
+        <div class="price-label">Consultation</div>
+        <div class="price-title">Strategy Call (30 minutes)</div>
+        <div class="price-num">$25 <small>one-time</small></div>
+        <ul class="price-list">
+          <li>Discuss your idea live on a call</li>
+          <li>Check if it’s ready for automation</li>
+          <li>Clarify platforms, limitations, next steps</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;" onclick="directCheckout('Strategy Call (30 minutes)')">
+          Book Call
+        </button>
+      </div>
+
+      <div class="card card-hover price-card">
+        <div class="price-label">Signals</div>
+        <div class="price-title">Indicator / Alert Script</div>
+        <div class="price-num">$39 <small>one-time</small></div>
+        <ul class="price-list">
+          <li>TradingView indicator or alert-only script</li>
+          <li>Encodes your exact entry/exit logic</li>
+          <li>Great for testing before full automation</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;" onclick="directCheckout('Indicator / Alert Script')">
+          Order Indicator
+        </button>
+      </div>
+
+      <div class="card card-hover price-card">
+        <div class="price-label">Maintenance</div>
+        <div class="price-title">Bot Debug Session</div>
+        <div class="price-num">$59 <small>one-time</small></div>
+        <ul class="price-list">
+          <li>Trace and fix bugs in your existing bot</li>
+          <li>Clean up structure and clarify behavior</li>
+          <li>Minor improvements included where sensible</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;" onclick="directCheckout('Bot Debug Session')">
+          Fix My Bot
+        </button>
+      </div>
+
+      <div class="card card-hover price-card">
+        <div class="price-label">Deployment</div>
+        <div class="price-title">VPS Setup & Deployment</div>
+        <div class="price-num">$69 <small>one-time</small></div>
+        <ul class="price-list">
+          <li>Full VPS setup for your trading bot</li>
+          <li>Environment configured for your platform</li>
+          <li>Bot deployed to run 24/7</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;" onclick="directCheckout('VPS Setup & Deployment')">
+          Get VPS Setup
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOT PACKAGES -->
+<section class="section" id="bots">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-kicker">Bot packages</div>
+      <h2 class="section-title">Pick the level that matches your strategy</h2>
+      <p class="section-subtitle">
+        All packages include clean, documented code, basic instructions and bug-fix support if the bot
+        doesn’t follow the agreed rules.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="card card-hover price-card">
+        <div class="price-label">Starter</div>
+        <div class="price-title">Basic Bot</div>
+        <div class="price-num">$49 <small>one-time</small></div>
+        <ul class="price-list">
+          <li>1 indicator, 1 trading pair</li>
+          <li>Simple entry & exit rules</li>
+          <li>Basic stop loss / take profit</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;" onclick="addToCart('Basic Bot',49)">
+          Add Basic Bot to Order
+        </button>
+      </div>
+
+      <div class="card-alt card-hover price-card">
+        <div class="badge-popular">Most popular</div>
+        <div style="height:6px;"></div>
+        <div class="price-label">Advanced</div>
+        <div class="price-title">Pro Bot</div>
+        <div class="price-num">$149 <small>one-time</small></div>
+        <ul class="price-list">
+          <li>Multiple indicators & conditions</li>
+          <li>Filters, trailing stops, partial exits</li>
+          <li>Ideal for serious rule-based systems</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;" onclick="addToCart('Pro Bot',149)">
+          Add Pro Bot to Order
+        </button>
+        <p class="price-note">
+          Recommended if you already trade your strategy manually and want a faithful automation of what you do.
+        </p>
+      </div>
+
+      <div class="card card-hover price-card">
+        <div class="price-label">Full suite</div>
+        <div class="price-title">Premium Bot</div>
+        <div class="price-num">$499 <small>one-time</small></div>
+        <ul class="price-list">
+          <li>Everything in Pro, plus:</li>
+          <li>Multi-pair / multi-market logic</li>
+          <li>VPS setup included</li>
+          <li>Future debugging at 50% off</li>
+          <li>Unlimited short consultation calls</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;" onclick="addToCart('Premium Bot',499)">
+          Add Premium Bot to Order
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE TABLE -->
+<section class="section">
+  <div class="container">
+    <div class="card compare-card">
+      <h3 style="font-size:16px;margin-top:0;margin-bottom:8px;">Compare bot packages</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Basic</th>
+            <th>Pro</th>
+            <th>Premium</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Max indicators / conditions</td>
+            <td>Simple single-indicator logic</td>
+            <td>Multiple indicators & filters</td>
+            <td>Complex, multi-layer conditions</td>
+          </tr>
+          <tr>
+            <td>Markets / pairs</td>
+            <td>1 pair / market</td>
+            <td>1–2 pairs</td>
+            <td>Multi-pair / multi-market</td>
+          </tr>
+          <tr>
+            <td>Exits & risk</td>
+            <td>Fixed SL / TP</td>
+            <td>Advanced exits (trail, partials)</td>
+            <td>Advanced exits + portfolio rules</td>
+          </tr>
+          <tr>
+            <td>VPS setup</td>
+            <td>Not included</td>
+            <td>Add-on possible</td>
+            <td>Included</td>
+          </tr>
+          <tr>
+            <td>Debugging discount for future changes</td>
+            <td>Standard pricing</td>
+            <td>Standard pricing</td>
+            <td>50% off</td>
+          </tr>
+          <tr>
+            <td>Consultation calls</td>
+            <td>Short email clarifications</td>
+            <td>Short calls possible as needed</td>
+            <td>Unlimited short calls for tweaks</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CART + ORDER -->
+<section class="cart-section">
+  <div class="container">
+    <div class="cart-layout">
+      <div class="card cart-box">
+        <div class="cart-title">Your bot order</div>
+        <p class="cart-text">
+          Choose one bot package above, then describe your strategy here. You’ll send an email summary and be
+          redirected to secure payment via Stripe.
+        </p>
+
+        <div id="cart-items"></div>
+        <div class="cart-total-label">Total: <span id="cart-total">$0</span></div>
+      </div>
+
+      <div class="card cart-box">
+        <div class="cart-title">Strategy & contact details</div>
+
+        <div class="order-grid">
+          <div class="field">
+            <label for="order-name">Your name</label>
+            <input id="order-name" type="text" placeholder="John Trader" />
+          </div>
+          <div class="field">
+            <label for="order-email">Email</label>
+            <input id="order-email" type="email" placeholder="you@example.com" />
+          </div>
+          <div class="field">
+            <label for="order-platform">Platform / exchange</label>
+            <input id="order-platform" type="text" placeholder="Binance, Bybit, MT4, MT5, cTrader, etc." />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="order-strategy">Describe your strategy</label>
+          <textarea id="order-strategy" rows="5" placeholder="Explain your rules in plain English:
+• Markets and timeframes
+• Entry conditions
+• Exit conditions
+• Stop loss / take profit
+• Any filters or special rules"></textarea>
+        </div>
+
+        <div class="terms">
+          <label>
+            <input id="order-terms" type="checkbox" />
+            I understand this is a coding service and not financial advice. I am responsible for how I use the bot.
+          </label>
+        </div>
+
+        <button class="btn btn-primary" style="width:100%;margin-top:6px;" onclick="goToCheckout()">
+          Send order & pay with Stripe
+        </button>
+
+        <p class="price-note" style="margin-top:8px;">
+          Clicking the button will open an email draft to <strong>contact@autotradecode.com</strong> with your details,
+          then redirect you to Stripe to complete secure payment for your selected package.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  AutoTradeCode © 2025 — Custom trading automation. Nothing here is financial advice. You are responsible for your own trading decisions and risk.
+</footer>
+
+</body>
+</html>
