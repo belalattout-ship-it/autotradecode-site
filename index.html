@@ -24,13 +24,9 @@
       --danger: #ef4444;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -50,12 +46,10 @@
       font-family: "Sora", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    .fade {
-      animation: fadeIn 0.8s ease;
-    }
+    .fade { animation: fadeIn 0.6s ease; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .card,
@@ -107,9 +101,7 @@
       color: #111827;
     }
 
-    .logo span {
-      color: var(--accent);
-    }
+    .logo span { color: var(--accent); }
 
     nav ul {
       list-style: none;
@@ -151,7 +143,6 @@
       color: #ffffff;
       text-decoration: none;
       background: var(--accent);
-      box-shadow: none;
       white-space: nowrap;
     }
 
@@ -173,9 +164,7 @@
       width: 150px;
     }
 
-    .nav-search-input::placeholder {
-      color: #9ca3af;
-    }
+    .nav-search-input::placeholder { color: #9ca3af; }
 
     .nav-search-btn {
       border: none;
@@ -197,9 +186,7 @@
     }
 
     @media (max-width: 900px) {
-      .nav-search-form {
-        display: none;
-      }
+      .nav-search-form { display: none; }
     }
 
     @media (max-width: 768px) {
@@ -218,16 +205,10 @@
         display: block;
         margin: 4px 0;
       }
-      nav.nav-open ul {
-        display: block;
-      }
+      nav.nav-open ul { display: block; }
 
-      .nav-cta {
-        display: none;
-      }
-      .nav-toggle {
-        display: inline-block;
-      }
+      .nav-cta { display: none; }
+      .nav-toggle { display: inline-block; }
     }
 
     /* BUTTONS */
@@ -297,9 +278,7 @@
       color: #111827;
     }
 
-    .hero-title span {
-      color: #1d4ed8;
-    }
+    .hero-title span { color: #1d4ed8; }
 
     .hero-subtitle {
       font-size: 15px;
@@ -358,134 +337,14 @@
       margin-top: 4px;
     }
 
-    .hero-panel {
-      padding: 18px 16px 18px;
-    }
-
-    .hero-panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .hero-panel-title {
-      font-size: 14px;
-      font-weight: 600;
-    }
-    .hero-panel-tag {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      border: 1px solid #bfdbfe;
-    }
-
-    .hero-panel-sub {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-    }
-
-    .hero-panel-grid {
-      display: grid;
-      grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
-      gap: 12px;
-    }
-
-    .hero-panel-block {
-      border-radius: 12px;
-      border: 1px solid #e5e7eb;
-      background: #f9fafb;
-      padding: 10px;
-    }
-
-    .hero-panel-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    .hero-panel-strategy {
-      font-size: 13px;
-    }
-
-    .hero-panel-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-    }
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 8px rgba(34,197,94,0.8);
-    }
-
-    .trades-list {
-      margin-top: 6px;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
-      background: #ffffff;
-      padding: 8px 8px 6px;
-    }
-    .trades-header {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-    .trade-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      padding: 3px 0;
-      border-top: 1px solid #e5e7eb;
-    }
-    .trade-symbol {
-      color: #111827;
-    }
-    .trade-pnl-positive {
-      color: #22c55e;
-    }
-    .trade-pnl-negative {
-      color: #ef4444;
-    }
-
-    .mini-chart {
-      height: 80px;
-      background: #eff6ff;
-      border-radius: 10px;
-      border: 1px solid #bfdbfe;
-      position: relative;
-      overflow: hidden;
-    }
-    .mini-chart-line {
-      position: absolute;
-      inset: 12px 8px 10px 8px;
-      background: linear-gradient(135deg, rgba(37,99,235,0.8), transparent);
-      opacity: 0.9;
-      mix-blend-mode: screen;
-    }
-
-    /* SECTION BASE */
+    /* Generic sections */
 
     .section {
       padding: 40px 0 32px;
     }
 
-    .section:nth-of-type(odd) {
-      background: #ffffff;
-    }
-
-    .section:nth-of-type(even) {
-      background: #f9fafb;
-    }
+    .section:nth-of-type(odd) { background: #ffffff; }
+    .section:nth-of-type(even) { background: #f9fafb; }
 
     .section-header {
       text-align: left;
@@ -514,8 +373,6 @@
       gap: 16px;
     }
 
-    /* SIMPLE HOME SECTIONS */
-
     .home-pill-list {
       list-style: none;
       padding-left: 0;
@@ -529,6 +386,41 @@
       color: var(--accent);
     }
 
+    /* CONTACT FORM (used on contact.html, but okay to load everywhere) */
+
+    .contact-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+      margin-top: 12px;
+    }
+
+    .contact-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 13px;
+    }
+
+    .contact-form-group label { color: var(--text-muted); }
+
+    .contact-input,
+    .contact-textarea {
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      color: #111827;
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+
+    .contact-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .contact-full-width { grid-column: 1 / -1; }
+
     /* FOOTER */
 
     footer {
@@ -541,9 +433,8 @@
     }
 
     @media (max-width: 900px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
+      .hero-grid { grid-template-columns: 1fr; }
+      .contact-form { grid-template-columns: 1fr; }
     }
   </style>
 
@@ -618,7 +509,8 @@
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- 👇 PAGE-SPECIFIC CONTENT GOES HERE 👇 -->
+<!-- HOME HERO -->
 <section id="hero" class="hero fade">
   <div class="container">
     <div class="hero-grid">
@@ -661,22 +553,22 @@
       </div>
 
       <div class="card hero-panel">
-        <div class="hero-panel-header">
+        <div class="hero-panel-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
           <div>
-            <div class="hero-panel-label">Example bot</div>
-            <div class="hero-panel-title">4H EMA + RSI Swing Bot</div>
+            <div class="hero-panel-label" style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.16em;">Example bot</div>
+            <div class="hero-panel-title" style="font-size:14px;font-weight:600;">4H EMA + RSI Swing Bot</div>
           </div>
           <span class="hero-panel-tag">Demo</span>
         </div>
         <p class="hero-panel-sub">
-          Simple example: a bot that trades BTC and ETH on the 4H chart using EMA and RSI rules, with fixed stop loss
-          and take profit.
+          Example: a bot that trades BTC and ETH on the 4H chart using EMA and RSI rules, with fixed stop loss and
+          take profit.
         </p>
 
         <div class="hero-panel-grid">
           <div class="hero-panel-block">
             <div class="hero-panel-label">Rules</div>
-            <div class="hero-panel-strategy">
+            <div class="hero-panel-strategy" style="font-size:13px;">
               • Go long when price is above EMA20 and RSI &gt; 55<br/>
               • Go short when price is below EMA20 and RSI &lt; 45<br/>
               • 1% fixed SL, 2.5R target<br/>
@@ -706,22 +598,21 @@
                 <span class="trade-pnl-positive">+1.1</span>
               </div>
             </div>
-
-            <div class="mini-chart" style="margin-top:8px;">
+            <div class="mini-chart" style="margin-top:8px;position:relative;overflow:hidden;">
               <div class="mini-chart-line"></div>
             </div>
           </div>
         </div>
 
         <p style="font-size:11px;color:var(--text-muted);margin-top:10px;">
-          This is an example only. No performance is promised. Bots simply follow your rules; trading always carries risk.
+          Example only. No performance is promised. Bots simply follow your rules; trading always carries risk.
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- QUICK OVERVIEW SECTION -->
+<!-- QUICK OVERVIEW -->
 <section class="section fade">
   <div class="container">
     <div class="section-header">
@@ -737,16 +628,16 @@
         <h3 style="font-size:16px;margin:0 0 6px;">1. You explain the idea</h3>
         <ul class="home-pill-list">
           <li>You tell me which market, timeframe and instruments.</li>
-          <li>You explain when to enter, when to exit and how much to risk.</li>
-          <li>You can use screenshots, TradingView links or simple text.</li>
+          <li>You explain entry, exit and risk in simple words.</li>
+          <li>Screenshots or TradingView links are welcome.</li>
         </ul>
       </div>
       <div class="card-soft card-hover" style="padding:14px;">
         <h3 style="font-size:16px;margin:0 0 6px;">2. I build the bot or indicator</h3>
         <ul class="home-pill-list">
-          <li>I write clean code for your platform (TradingView, MT4/5, exchange API...).</li>
+          <li>I write clean code for your platform (TV, MT4/5, API...).</li>
           <li>You get the full source code, not a locked file.</li>
-          <li>We test the logic in demo conditions before you go live.</li>
+          <li>We test behaviour in demo before you go live.</li>
         </ul>
       </div>
     </div>
@@ -760,7 +651,7 @@
       <h2 class="section-title">Ready to talk about your strategy?</h2>
       <p class="section-subtitle">
         The easiest way to start is to send me a short description of your rules and your platform. I’ll tell you what’s
-        possible and which package on the Pricing page fits best.
+        possible and which package fits best.
       </p>
     </div>
 
