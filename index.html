@@ -157,6 +157,42 @@ nav ul li a:hover {
   background: radial-gradient(circle at top left, rgba(37,99,235,0.45), rgba(15,23,42,0.95));
 }
 
+/* NAV SEARCH BAR */
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-search-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-search-input {
+  padding: 6px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.5);
+  background: rgba(15,23,42,0.9);
+  color: #e5e7eb;
+  font-size: 12px;
+  width: 150px;
+}
+
+.nav-search-input::placeholder {
+  color: rgba(148,163,184,0.9);
+}
+
+.nav-search-btn {
+  border: none;
+  background: transparent;
+  color: rgba(148,163,184,0.9);
+  cursor: pointer;
+  font-size: 14px;
+}
+
 /* MOBILE NAV */
 
 .nav-toggle {
@@ -168,6 +204,12 @@ nav ul li a:hover {
   padding: 6px 10px;
   font-size: 18px;
   cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .nav-search-form {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -618,6 +660,46 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
+/* CONTACT FORM */
+
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+  margin-top: 12px;
+}
+
+.contact-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.contact-form-group label {
+  color: var(--text-muted);
+}
+
+.contact-input,
+.contact-textarea,
+.contact-select {
+  border-radius: 10px;
+  border: 1px solid rgba(148,163,184,0.6);
+  background: rgba(15,23,42,0.9);
+  color: #e5e7eb;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.contact-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.contact-full-width {
+  grid-column: 1 / -1;
+}
+
 /* FOOTER */
 
 footer {
@@ -628,203 +710,166 @@ footer {
   text-align: center;
 }
 
-/* BEFORE / AFTER */
-
-.before-after-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
-  gap: 16px;
-}
-.before-after-col {
-  border-radius: 14px;
-  border: 1px solid rgba(148,163,184,0.35);
-  background: radial-gradient(circle at top left, rgba(37,99,235,0.12), rgba(15,23,42,0.98));
-  padding: 14px;
-}
-.before-after-label {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-}
-.before-after-title {
-  font-size: 15px;
-  margin-bottom: 8px;
-}
-.before-after-list {
-  margin: 0;
-  padding-left: 16px;
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-/* ESTIMATE WIDGET */
-
-.estimate-card {
-  max-width: 620px;
-  margin: 0 auto;
-  padding: 18px 18px 20px;
-}
-.estimate-form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-  gap: 12px 16px;
-  margin-top: 12px;
-}
-.estimate-field label {
-  display: block;
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-}
-.estimate-select,
-.estimate-checkbox-group {
-  width: 100%;
-  font-size: 13px;
-  padding: 7px 9px;
-  border-radius: 10px;
-  border: 1px solid rgba(148,163,184,0.6);
-  background: #020617;
-  color: var(--text-main);
-}
-.estimate-checkbox-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 10px;
-}
-.estimate-checkbox-group label {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  color: var(--text-muted);
-}
-.estimate-result {
-  margin-top: 14px;
-  font-size: 13px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(37,99,235,0.6);
-  background: radial-gradient(circle at top left, rgba(37,99,235,0.16), rgba(15,23,42,0.98));
-}
-
-/* WHY CHOOSE */
-
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-  gap: 16px;
-}
-.why-card-title {
-  font-size: 15px;
-  margin-bottom: 6px;
-}
-.why-list {
-  margin: 0;
-  padding-left: 16px;
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-/* ABOUT */
-
-.about-card {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 18px 18px 20px;
-}
-.about-tag {
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-}
-.about-title {
-  font-size: 18px;
-  margin-bottom: 6px;
-}
-.about-text {
-  font-size: 14px;
-  color: var(--text-muted);
-}
-.about-highlights {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-.about-pill {
-  font-size: 12px;
-  padding: 5px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(148,163,184,0.4);
-  background: rgba(15,23,42,0.95);
-}
-
-/* TESTIMONIALS */
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-  gap: 16px;
-}
-.testimonial {
-  padding: 14px 14px 16px;
-}
-.testimonial-quote {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-}
-.testimonial-name {
-  font-size: 13px;
-  font-weight: 500;
-}
-.testimonial-role {
-  font-size: 11px;
-  color: var(--text-muted);
-}
-
-/* FAQ */
-
-.faq-grid {
-  max-width: 720px;
-  margin: 0 auto;
-}
-.faq-item {
-  border-radius: 12px;
-  border: 1px solid rgba(148,163,184,0.35);
-  background: #020617;
-  margin-bottom: 8px;
-  padding: 10px 12px;
-}
-.faq-question {
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.faq-toggle {
-  font-size: 16px;
-  opacity: 0.6;
-}
-.faq-answer {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 6px;
-  display: none;
-}
-
 /* RESPONSIVE HERO */
 
 @media (max-width: 900px) {
   .hero-grid {
     grid-template-columns: 1fr;
   }
+
+  .contact-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================= */
+/* SIMPLE LIGHT THEME OVERRIDE */
+/* ========================= */
+
+:root {
+  --bg-main: #f3f4f6;
+  --bg-elevated: #ffffff;
+  --bg-card: #ffffff;
+  --bg-soft: #f9fafb;
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.08);
+  --border-subtle: #e5e7eb;
+  --text-main: #0f172a;
+  --text-muted: #6b7280;
+}
+
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* nav: white, simple */
+
+nav {
+  background: rgba(255,255,255,0.96);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo {
+  color: #111827;
+}
+
+nav ul li a {
+  color: #6b7280;
+}
+nav ul li a:hover {
+  color: #111827;
+  background: #e5e7eb;
+}
+
+.nav-cta {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: none;
+}
+
+/* search input light */
+
+.nav-search-input {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+.nav-search-input::placeholder {
+  color: #9ca3af;
+}
+.nav-search-btn {
+  color: #9ca3af;
+}
+
+/* cards light */
+
+.card,
+.card-soft {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 10px rgba(15,23,42,0.04);
+}
+
+.card-hover:hover {
+  box-shadow: 0 8px 18px rgba(15,23,42,0.08);
+  border-color: #d1d5db;
+}
+
+/* hero + sections */
+
+.hero {
+  background: #f9fafb;
+}
+
+.section:nth-of-type(odd) {
+  background: #ffffff;
+}
+
+/* metrics, badges slightly softer */
+
+.metric {
+  background: #ffffff;
+}
+.hero-badge {
+  border-color: #e5e7eb;
+  color: #6b7280;
+}
+
+/* platforms strip */
+
+.platforms-strip {
+  background: #f3f4f6;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+.platform-pill {
+  background: #ffffff;
+  color: #111827;
+  border-color: #e5e7eb;
+}
+
+/* hero panel + trades */
+
+.hero-panel-block {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+}
+.trades-list {
+  background: #ffffff;
+  border-color: #e5e7eb;
+}
+.mini-chart {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+/* contact inputs light */
+
+.contact-input,
+.contact-textarea,
+.contact-select {
+  background: #ffffff;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+footer {
+  background: #f9fafb;
+}
+
+/* buttons small tweak */
+
+.btn-ghost {
+  background: #ffffff;
+  border-color: #d1d5db;
+  color: #111827;
+}
+.btn-ghost:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
 }
 </style>
 
@@ -834,73 +879,38 @@ function toggleNav() {
   nav.classList.toggle('nav-open');
 }
 
-/* ESTIMATE LOGIC */
+/* simple on-page search: scrolls to first section containing the text */
 
-function updateEstimate() {
-  const platform = document.getElementById('estimate-platform').value;
-  const complexity = document.getElementById('estimate-complexity').value;
-  const indicator = document.getElementById('extra-indicator').checked;
-  const vps = document.getElementById('extra-vps').checked;
-  const backtest = document.getElementById('extra-backtest').checked;
+function handleSiteSearch(event) {
+  event.preventDefault();
+  const input = document.getElementById('site-search-input');
+  if (!input) return;
+  const query = input.value.trim().toLowerCase();
+  if (!query) return;
 
-  let score = 0;
+  const sections = document.querySelectorAll('section');
+  let target = null;
 
-  if (complexity === 'simple') score += 1;
-  if (complexity === 'moderate') score += 2;
-  if (complexity === 'complex') score += 3;
-
-  if (platform === 'multi') score += 2;
-  if (platform === 'api') score += 1;
-
-  if (indicator) score += 1;
-  if (vps) score += 1;
-  if (backtest) score += 1;
-
-  let packageName = 'Basic';
-  let description = 'Good fit for a single-market bot or indicator with a clear, simple rule set.';
-
-  if (score >= 4 && score <= 6) {
-    packageName = 'Pro';
-    description = 'Ideal for more detailed logic, filters, or a mix of execution + indicators.';
-  }
-  if (score > 6) {
-    packageName = 'Premium';
-    description = 'Best for multi-asset, multi-platform or infrastructure-style projects.';
-  }
-
-  const resultEl = document.getElementById('estimate-result');
-  if (resultEl) {
-    resultEl.innerHTML =
-      '<strong>Suggested package:</strong> ' + packageName +
-      '<br/>' +
-      '<span style="color: var(--text-muted);">' + description +
-      ' For exact pricing, see the packages on the Pricing page.</span>';
-  }
-}
-
-/* FAQ TOGGLE */
-
-function initFaq() {
-  const items = document.querySelectorAll('.faq-item');
-  items.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    const answer = item.querySelector('.faq-answer');
-    const toggle = item.querySelector('.faq-toggle');
-    if (!question || !answer) return;
-
-    question.addEventListener('click', () => {
-      const isOpen = answer.style.display === 'block';
-      answer.style.display = isOpen ? 'none' : 'block';
-      if (toggle) {
-        toggle.textContent = isOpen ? '+' : '–';
-      }
-    });
+  sections.forEach(section => {
+    if (target) return;
+    const text = section.innerText.toLowerCase();
+    if (text.includes(query)) {
+      target = section;
+    }
   });
+
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    alert('No matching content found on this page for: "' + query + '"');
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  updateEstimate();
-  initFaq();
+  const form = document.getElementById('site-search-form');
+  if (form) {
+    form.addEventListener('submit', handleSiteSearch);
+  }
 });
 </script>
 </head>
@@ -909,17 +919,31 @@ document.addEventListener('DOMContentLoaded', () => {
 <nav>
   <div class="nav-inner">
     <div class="logo">AUTO<span>TRADE</span>CODE</div>
+
     <ul>
-      <li><a href="index.html#hero">Home</a></li>
-      <li><a href="index.html#services">Services</a></li>
-      <li><a href="index.html#process">Process</a></li>
-      <li><a href="index.html#examples">Examples</a></li>
-      <li><a href="index.html#faq">FAQ</a></li>
-      <li><a href="pricing.html">Pricing</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#examples">Examples</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="pricing.html" class="nav-cta">Start Your Bot</a>
-    <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNav()">☰</button>
+
+    <div class="nav-right">
+      <!-- Search bar -->
+      <form id="site-search-form" class="nav-search-form">
+        <input
+          id="site-search-input"
+          class="nav-search-input"
+          type="search"
+          placeholder="Search on this page"
+          aria-label="Search on this page"
+        />
+        <button class="nav-search-btn" type="submit">🔍</button>
+      </form>
+
+      <a href="#contact" class="nav-cta">Start a Bot Project</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNav()">☰</button>
+    </div>
   </div>
 </nav>
 
@@ -944,8 +968,8 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <div class="hero-cta-group">
-          <a href="pricing.html" class="btn btn-primary">Start Your Bot (3–7 Day Delivery)</a>
-          <a href="#examples" class="btn btn-ghost">View Example Bots</a>
+          <a href="#contact" class="btn btn-primary">Tell me about your strategy</a>
+          <a href="#examples" class="btn btn-ghost">View example bots</a>
         </div>
 
         <div class="hero-metrics">
@@ -1046,42 +1070,6 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </section>
 
-<!-- BEFORE / AFTER -->
-<section id="before-after" class="section fade">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-kicker">Before & After</div>
-      <h2 class="section-title">What changes when your rules run as a bot</h2>
-      <p class="section-subtitle">
-        The same trading idea — but executed consistently, without screen-watching or second-guessing every entry.
-      </p>
-    </div>
-
-    <div class="before-after-grid">
-      <div class="before-after-col">
-        <div class="before-after-label">Before</div>
-        <div class="before-after-title">Manual, discretionary execution</div>
-        <ul class="before-after-list">
-          <li>Staring at charts to catch setups in time.</li>
-          <li>Missed trades during sleep, work or travel.</li>
-          <li>Inconsistent entries when emotions get involved.</li>
-          <li>Rules live in notes and screenshots, not in code.</li>
-        </ul>
-      </div>
-      <div class="before-after-col">
-        <div class="before-after-label">After</div>
-        <div class="before-after-title">Rules encoded as a bot</div>
-        <ul class="before-after-list">
-          <li>Bot watches markets and triggers according to your logic.</li>
-          <li>No missed signals due to screen time or distractions.</li>
-          <li>Every trade follows the same predefined conditions.</li>
-          <li>Strategy lives in code that can be tested, logged and improved.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- WHO IT'S FOR -->
 <section id="who" class="section fade">
   <div class="container">
@@ -1167,58 +1155,8 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
 
     <p style="font-size:13px;color:var(--text-muted);margin-top:16px;">
-      Detailed packages & pricing are on the <a href="pricing.html" style="color:#93c5fd;text-decoration:none;">Pricing</a> page.
+      Detailed packages & pricing are on the <a href="pricing.html" style="color:#2563eb;text-decoration:none;">Pricing</a> page.
     </p>
-  </div>
-</section>
-
-<!-- ESTIMATE WIDGET -->
-<section id="estimate" class="section fade">
-  <div class="container">
-    <div class="card-soft card-hover estimate-card">
-      <div class="section-kicker">Not sure where to start?</div>
-      <h2 class="section-title" style="font-size:18px;margin:6px 0 4px;">Estimate the right package for your bot</h2>
-      <p class="section-subtitle" style="font-size:13px;">
-        Answer a few quick questions to see which package on the Pricing page is likely to fit your project. This is a
-        rough guide — final scope is always agreed before any work starts.
-      </p>
-
-      <div class="estimate-form">
-        <div class="estimate-field">
-          <label for="estimate-platform">Main platform</label>
-          <select id="estimate-platform" class="estimate-select" onchange="updateEstimate()">
-            <option value="tradingview">TradingView / indicators</option>
-            <option value="mt4">MT4 / MT5 / cTrader</option>
-            <option value="api">Crypto exchange API bot</option>
-            <option value="multi">Multi-platform / mixed stack</option>
-          </select>
-        </div>
-        <div class="estimate-field">
-          <label for="estimate-complexity">Strategy complexity</label>
-          <select id="estimate-complexity" class="estimate-select" onchange="updateEstimate()">
-            <option value="simple">Simple – 1–3 conditions</option>
-            <option value="moderate">Moderate – 4–7 conditions</option>
-            <option value="complex">Complex – 8+ conditions / multi-timeframe</option>
-          </select>
-        </div>
-        <div class="estimate-field" style="grid-column:1/-1;">
-          <label>Extras you may need</label>
-          <div class="estimate-checkbox-group">
-            <label><input type="checkbox" id="extra-indicator" onchange="updateEstimate()"> Indicator / alert script as well</label>
-            <label><input type="checkbox" id="extra-vps" onchange="updateEstimate()"> VPS setup / 24/7 deployment</label>
-            <label><input type="checkbox" id="extra-backtest" onchange="updateEstimate()"> Help with test / demo configuration</label>
-          </div>
-        </div>
-      </div>
-
-      <div id="estimate-result" class="estimate-result">
-        <!-- Filled by JS -->
-      </div>
-
-      <p style="font-size:12px;color:var(--text-muted);margin-top:8px;">
-        For an exact quote, choose a package on the Pricing page and include these details in your message.
-      </p>
-    </div>
   </div>
 </section>
 
@@ -1265,46 +1203,6 @@ document.addEventListener('DOMContentLoaded', () => {
           You get full source code, basic documentation and setup help. If the bot misbehaves relative
           to the agreed rules, I fix it — not bill you again.
         </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY CHOOSE -->
-<section id="why" class="section fade">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-kicker">Why this studio</div>
-      <h2 class="section-title">Why traders choose AutoTradeCode</h2>
-      <p class="section-subtitle">
-        You’re not buying a mystery EA from a marketplace. You’re working directly with the developer who writes, explains and supports your code.
-      </p>
-    </div>
-
-    <div class="why-grid">
-      <div class="card-soft card-hover">
-        <div class="why-card-title">Clean, readable code</div>
-        <ul class="why-list">
-          <li>No obfuscation: you receive full source code.</li>
-          <li>Logic is commented so you can follow every condition.</li>
-          <li>Structured so future changes are straightforward.</li>
-        </ul>
-      </div>
-      <div class="card-soft card-hover">
-        <div class="why-card-title">Built to your rules, not mine</div>
-        <ul class="why-list">
-          <li>No “secret sauce” or hidden filters.</li>
-          <li>Your strategy stays your intellectual property.</li>
-          <li>I implement what you describe, and highlight any ambiguities.</li>
-        </ul>
-      </div>
-      <div class="card-soft card-hover">
-        <div class="why-card-title">Support when it actually matters</div>
-        <ul class="why-list">
-          <li>Revisions when the bot does something different from the spec.</li>
-          <li>Help with installation and basic configuration.</li>
-          <li>Clear communication about what is and isn’t included.</li>
-        </ul>
       </div>
     </div>
   </div>
@@ -1358,162 +1256,8 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
 
     <p style="font-size:13px;color:var(--text-muted);margin-top:16px;">
-      Ready to turn your own idea into a build? Check <a href="pricing.html" style="color:#93c5fd;text-decoration:none;">Pricing</a> for packages and add-ons.
+      Ready to turn your own idea into a build? Scroll down to the contact form and send your rules.
     </p>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="section fade">
-  <div class="container">
-    <div class="card-soft card-hover about-card">
-      <div class="about-tag">About</div>
-      <h2 class="about-title">Who’s behind AutoTradeCode?</h2>
-      <p class="about-text">
-        AutoTradeCode is a one-person trading automation studio focused on turning clear, rules-based strategies into
-        production-ready code. I work directly with traders who think in “IF this THEN that”, and want their ideas
-        expressed as bots, indicators and tools — not bought from a marketplace as a black box.
-      </p>
-      <p class="about-text" style="margin-top:8px;">
-        I build in Pine Script (TradingView), MQL4/5 (MT4/MT5), cTrader and exchange APIs using Python or Node, with an
-        emphasis on clarity, logging and stability. You always get the source code and a straightforward explanation of
-        how it works.
-      </p>
-      <div class="about-highlights">
-        <div class="about-pill">TradingView · MT4/MT5 · cTrader</div>
-        <div class="about-pill">Exchange API bots (Binance, Bybit, OKX)</div>
-        <div class="about-pill">Custom risk & session logic</div>
-        <div class="about-pill">VPS-ready deployments</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials" class="section fade">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-kicker">Social proof</div>
-      <h2 class="section-title">What traders say after going live</h2>
-      <p class="section-subtitle">
-        Replace these placeholders with real feedback from your own clients — short, specific comments work best.
-      </p>
-    </div>
-
-    <!--
-      TODO: Replace the sample text below with real testimonials.
-      Keep them short and focused on clarity, reliability and communication.
-    -->
-
-    <div class="testimonials-grid">
-      <div class="card-soft card-hover testimonial">
-        <p class="testimonial-quote">
-          “&lbrack;Your best client quote here – for example: ‘The bot executes exactly like my backtests and saved me hours of screen time each week.’&rbrack;”
-        </p>
-        <div class="testimonial-name">Client name / initials</div>
-        <div class="testimonial-role">Manual crypto swing trader</div>
-      </div>
-      <div class="card-soft card-hover testimonial">
-        <p class="testimonial-quote">
-          “&lbrack;Second quote – for example: ‘Communication was clear, and every edge case we discussed is documented in the code.’&rbrack;”
-        </p>
-        <div class="testimonial-name">Client name / initials</div>
-        <div class="testimonial-role">Forex session trader (MT4)</div>
-      </div>
-      <div class="card-soft card-hover testimonial">
-        <p class="testimonial-quote">
-          “&lbrack;Third quote – for example: ‘He cleaned up a messy Pine script and turned it into a stable strategy with alerts and proper risk controls.’&rbrack;”
-        </p>
-        <div class="testimonial-name">Client name / initials</div>
-        <div class="testimonial-role">System trader · TradingView</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq" class="section fade">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-kicker">FAQ</div>
-      <h2 class="section-title">Answers to common questions</h2>
-      <p class="section-subtitle">
-        If you still have questions after reading this, just send a short email with your idea and platform — I can tell you quickly what’s feasible.
-      </p>
-    </div>
-
-    <div class="faq-grid">
-      <div class="faq-item card-soft">
-        <div class="faq-question">
-          <span>Can you create a strategy for me or give financial advice?</span>
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          No. I don’t design trading strategies or give financial advice. My role is to take rules that you already
-          understand and rely on, and implement them as bots, indicators or tools. I can help you express your idea
-          precisely (“IF this THEN that”), but I don’t recommend what you should trade or how you should manage risk.
-        </div>
-      </div>
-
-      <div class="faq-item card-soft">
-        <div class="faq-question">
-          <span>Do you guarantee profits or specific performance?</span>
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          No performance is ever guaranteed. A bot is simply a tool that executes the rules you define, more consistently
-          and quickly than a human can. Markets are risky and unpredictable, and you are always responsible for your own
-          trading decisions, testing and risk management.
-        </div>
-      </div>
-
-      <div class="faq-item card-soft">
-        <div class="faq-question">
-          <span>What do you need from me to start a project?</span>
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          At minimum: your platform (for example, MT4, TradingView, Binance), the instruments and timeframes, and your
-          entry, exit and risk rules in plain English. Screenshots, example trades and TradingView links make it even
-          easier to match what you’re doing manually.
-        </div>
-      </div>
-
-      <div class="faq-item card-soft">
-        <div class="faq-question">
-          <span>Will I receive the full source code?</span>
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          Yes. Projects are delivered with full source code for the agreed platforms, not as locked or obfuscated files.
-          Where useful, I also add comments so you can see how conditions map to your original rules.
-        </div>
-      </div>
-
-      <div class="faq-item card-soft">
-        <div class="faq-question">
-          <span>What happens if the bot doesn’t match the agreed rules?</span>
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          If the bot’s behaviour differs from the logic we agreed in the brief, I treat that as a bug and fix it as
-          part of the project — not as a new order. If you later want to change or extend the rules, that’s handled as
-          a separate update or new build.
-        </div>
-      </div>
-
-      <div class="faq-item card-soft">
-        <div class="faq-question">
-          <span>Can you help with VPS or always-on setup?</span>
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          Yes. If you choose a package that includes deployment, I help you get your bot running on a VPS so it can
-          trade while your own computer is off. I can outline basic monitoring steps, but I don’t operate or manage
-          your account for you.
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1521,14 +1265,86 @@ document.addEventListener('DOMContentLoaded', () => {
 <section id="contact" class="contact-section fade">
   <div class="container">
     <div class="card-soft card-hover contact-card">
-      <h2 class="contact-title">Have questions before ordering?</h2>
+      <h2 class="contact-title">Tell me about your strategy</h2>
       <p class="contact-text">
-        If you’re not sure which package fits, or your setup is unusual, just send a short email with your
-        idea and platform details.<br /><br/>
-        Email: <a href="mailto:contact@autotradecode.com">contact@autotradecode.com</a><br/>
-        I typically reply within 1–2 business days.
+        Use this form to describe your idea in simple terms. I’ll reply by email, usually within 1–2 business days,
+        with follow-up questions and a suggested package.
       </p>
-      <a href="pricing.html" class="btn btn-primary" style="margin-top:10px;">Go to Pricing &amp; Packages</a>
+
+      <!-- FORM: sends email via Formspree, no mail app -->
+      <form
+        class="contact-form"
+        action="https://formspree.io/f/mpwvrnpn"
+        method="POST"
+      >
+        <div class="contact-form-group">
+          <label for="name">Your name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            class="contact-input"
+            placeholder="John Doe"
+            required
+          />
+        </div>
+
+        <div class="contact-form-group">
+          <label for="email">Email address</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            class="contact-input"
+            placeholder="you@example.com"
+            required
+          />
+        </div>
+
+        <div class="contact-form-group">
+          <label for="platform">Main platform</label>
+          <select id="platform" name="platform" class="contact-select">
+            <option value="TradingView">TradingView (Pine Script)</option>
+            <option value="MT4">MT4</option>
+            <option value="MT5">MT5</option>
+            <option value="cTrader">cTrader</option>
+            <option value="Binance">Binance</option>
+            <option value="Bybit">Bybit</option>
+            <option value="OKX">OKX</option>
+            <option value="Other">Other / mixed setup</option>
+          </select>
+        </div>
+
+        <div class="contact-form-group">
+          <label for="project-type">What do you need?</label>
+          <select id="project-type" name="project_type" class="contact-select">
+            <option value="New bot">New custom bot</option>
+            <option value="Indicator / alerts">Indicator / alerts only</option>
+            <option value="Debug / refactor">Debug / fix existing bot</option>
+            <option value="VPS setup">VPS / 24-7 setup</option>
+            <option value="Other">Other / not sure yet</option>
+          </select>
+        </div>
+
+        <div class="contact-form-group contact-full-width">
+          <label for="message">Describe your rules in plain English</label>
+          <textarea
+            id="message"
+            name="message"
+            class="contact-textarea"
+            placeholder="Example: I trade BTC and ETH on the 4H chart. I go long when price is above EMA20 and RSI crosses above 55..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="contact-form-group contact-full-width">
+          <button type="submit" class="btn btn-primary">Send strategy details</button>
+        </div>
+      </form>
+
+      <p style="font-size:11px;color:var(--text-muted);margin-top:8px;">
+        This form uses Formspree to send your message securely by email. I never share your details with anyone.
+      </p>
     </div>
   </div>
 </section>
